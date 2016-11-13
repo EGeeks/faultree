@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <QDateTime>
+
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -28,6 +28,8 @@ MainWindow::MainWindow(QWidget *parent) :
     centerForm = new CenterForm(ui->centralwidget);
     centerForm->setGeometry(QRect(0, 0, 1019, 581));
 
+    // 打开数据库
+    createDB();
 }
 
 MainWindow::~MainWindow()
@@ -80,4 +82,64 @@ void MainWindow::on_maintrainAction_triggered()
 void MainWindow::on_helpToolAction_triggered()
 {
     centerForm->setCurrentWidget(5);
+}
+
+void MainWindow::createDB()
+{
+    MyDB::get_instance()->connect();
+
+    if(MyDB::get_instance()->isConnOK() == false) {
+        QMessageBox::warning(NULL, "错误", "数据库连接失败");
+        return;
+    }
+
+    QSqlQuery query;
+    bool bsuccess;
+
+    /*
+     *  tree 表
+     *  nodeID   节点ID
+     *  ErrID    故障ID
+     *  ErrDesc  节点名称
+     *  ruleID   对应规则ID
+     */
+    bsuccess = query.exec("create table IF NOT EXISTS tree " \
+                         "(nodeID INTEGER, ErrID INTEGER, ErrDesc TEXT, ruleID TEXT)");
+    if(bsuccess == false) {
+        QMessageBox::warning(NULL, "错误", "数据库创建tree失败");
+    }
+
+    /*
+     *  rule 表
+     *  ruleID      规则ID
+     *  ErrDesc     故障信息
+     *  detectTip   检测提示
+     *  depandErrID 依赖故障ID
+     *  paramID     参数ID
+     *  Judg        判断标准
+     *  errReason   故障原因
+     *  Suggest     建议维修
+     */
+    bsuccess = query.exec("create table IF NOT EXISTS rule " \
+                          "(ruleID INTEGER, ErrDesc TEXT, detectTip TEXT, " \
+                          "depandErrID INTEGER, paramID INTEGER, Judg INTEGER, " \
+                          "errReason TEXT, Suggest TEXT)");
+    if(bsuccess == false) {
+        QMessageBox::warning(NULL, "错误", "数据库创建rule失败");
+    }
+
+    /*
+     *  parameter 表
+     *  paramID     参数ID
+     *  paramDesc   参数信息
+     *  paramType   参数类型
+     *  upperLimit  上限
+     *  lowerLimit  下限
+     */
+    bsuccess = query.exec("create table IF NOT EXISTS parameter" \
+                          "(paramID INTEGER, paramDesc TEXT, paramType INTEGER, " \
+                          "upperLimit INTEGER, lowerLimit INTEGER)");
+    if(bsuccess == false) {
+        QMessageBox::warning(NULL, "错误", "数据库创建parameter失败");
+    }
 }

@@ -2,10 +2,15 @@
 #define MAINWINDOW_H
 
 #include <QDebug>
+#include <QDateTime>
 #include <QLabel>
 #include <QMainWindow>
+#include <QMessageBox>
+#include <QSqlQuery>
+
 #include "login.h"
 #include "centerform.h"
+#include "mydb.h"
 
 namespace Ui {
 class MainWindow;
@@ -23,20 +28,15 @@ public slots:
       void on_LoginPass(QString username);
 
 protected:
-
     void timerEvent(QTimerEvent *e);
+    void createDB();
 
 private slots:
     void on_zhenduanAction_triggered();
-
     void on_treeMangeAction_triggered();
-
     void on_ruleAction_triggered();
-
     void on_fileAction_triggered();
-
     void on_maintrainAction_triggered();
-
     void on_helpToolAction_triggered();
 
 private:
