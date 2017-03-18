@@ -32,7 +32,7 @@ void Login::on_loginPushButton_clicked()
 
     if(username == "admin" && userpasswd == "admin") {
         qDebug() << "Login Success !!!";
-        emit checkPass();
+        emit checkPass(username);
     } else {
         QMessageBox::warning(NULL, "错误", "用户名或密码错误");
     }

@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>人机交互诊断系统--登陆窗口</string>
+   <string>数控机床人机交互诊断系统--登陆窗口</string>
   </property>
   <property name="windowIcon">
    <iconset resource="image.qrc">

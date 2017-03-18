@@ -20,7 +20,7 @@ private slots:
     void on_exitPushButton_clicked();
 
 signals:
-    void checkPass();
+    void checkPass(QString username);
 
 private:
     Ui::Login *ui;
