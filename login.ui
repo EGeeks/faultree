@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>人机交互诊断系统--登陆窗口</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="image.qrc">
+    <normaloff>:/new/icon/icon/zhuyetu.ico</normaloff>:/new/icon/icon/zhuyetu.ico</iconset>
+  </property>
   <layout class="QHBoxLayout" name="horizontalLayout">
    <property name="sizeConstraint">
     <enum>QLayout::SetFixedSize</enum>

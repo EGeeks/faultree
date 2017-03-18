@@ -17,8 +17,10 @@ public:
 
 private slots:
     void on_loginPushButton_clicked();
-
     void on_exitPushButton_clicked();
+
+signals:
+    void checkPass();
 
 private:
     Ui::Login *ui;
