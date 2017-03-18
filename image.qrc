@@ -1,0 +1,47 @@
+<RCC>
+    <qresource prefix="/new/icon">
+        <file>icon/1guzhang.PNG</file>
+        <file>icon/2shutu.PNG</file>
+        <file>icon/3.ico</file>
+        <file>icon/3guize.PNG</file>
+        <file>icon/4wenjian.PNG</file>
+        <file>icon/5xitong.PNG</file>
+        <file>icon/6fuzhu.PNG</file>
+        <file>icon/7help.PNG</file>
+        <file>icon/7tuichu.PNG</file>
+        <file>icon/23.ico</file>
+        <file>icon/42.ico</file>
+        <file>icon/44.ico</file>
+        <file>icon/45.ico</file>
+        <file>icon/87.ico</file>
+        <file>icon/162.ico</file>
+        <file>icon/170.ico</file>
+        <file>icon/171.ico</file>
+        <file>icon/172.ico</file>
+        <file>icon/add.ico</file>
+        <file>icon/backup.ico</file>
+        <file>icon/cancle.ico</file>
+        <file>icon/check.ico</file>
+        <file>icon/close.bmp</file>
+        <file>icon/Close.ico</file>
+        <file>icon/delete.ico</file>
+        <file>icon/detailed.ico</file>
+        <file>icon/edit.ico</file>
+        <file>icon/exit.ico</file>
+        <file>icon/find.ico</file>
+        <file>icon/h.ico</file>
+        <file>icon/help.bmp</file>
+        <file>icon/help.ico</file>
+        <file>icon/internet.bmp</file>
+        <file>icon/internet.ico</file>
+        <file>icon/print.ico</file>
+        <file>icon/question.ico</file>
+        <file>icon/s.ico</file>
+        <file>icon/save.ico</file>
+        <file>icon/search.ico</file>
+        <file>icon/z.ico</file>
+        <file>icon/zhuyetu.ico</file>
+        <file>icon/交互诊断登录窗口.JPG</file>
+        <file>icon/主界面背景图.jpg</file>
+    </qresource>
+</RCC>
