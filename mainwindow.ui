@@ -10,6 +10,12 @@
     <height>700</height>
    </rect>
   </property>
+  <property name="maximumSize">
+   <size>
+    <width>1019</width>
+    <height>700</height>
+   </size>
+  </property>
   <property name="windowTitle">
    <string>数控机床人机交互诊断系统</string>
   </property>
@@ -17,10 +23,8 @@
    <iconset resource="image.qrc">
     <normaloff>:/new/icon/icon/zhuyetu.ico</normaloff>:/new/icon/icon/zhuyetu.ico</iconset>
   </property>
-  <property name="styleSheet">
-   <string notr="true">QMainWindow{ 
-	border-image: url(:/new/icon/icon/主界面背景图.jpg);
-}</string>
+  <property name="toolButtonStyle">
+   <enum>Qt::ToolButtonIconOnly</enum>
   </property>
   <widget class="QWidget" name="centralwidget"/>
   <widget class="QMenuBar" name="menubar">
@@ -36,18 +40,18 @@
     <property name="title">
      <string>功能</string>
     </property>
-    <addaction name="action1"/>
-    <addaction name="action2"/>
-    <addaction name="action3"/>
-    <addaction name="action4"/>
-    <addaction name="action5"/>
-    <addaction name="action6"/>
-    <addaction name="action7"/>
+    <addaction name="zhenduanAction"/>
+    <addaction name="treeMangeAction"/>
+    <addaction name="ruleAction"/>
+    <addaction name="fileAction"/>
+    <addaction name="maintrainAction"/>
+    <addaction name="helpToolAction"/>
+    <addaction name="exitAction"/>
    </widget>
    <addaction name="menu"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <widget class="QToolBar" name="toolBar">
+  <widget class="QToolBar" name="zhentoolBar">
    <property name="windowTitle">
     <string>toolBar</string>
    </property>
@@ -72,15 +76,15 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
-   <addaction name="action1"/>
-   <addaction name="action2"/>
-   <addaction name="action3"/>
-   <addaction name="action4"/>
-   <addaction name="action5"/>
-   <addaction name="action6"/>
-   <addaction name="action7"/>
+   <addaction name="zhenduanAction"/>
+   <addaction name="treeMangeAction"/>
+   <addaction name="ruleAction"/>
+   <addaction name="fileAction"/>
+   <addaction name="maintrainAction"/>
+   <addaction name="helpToolAction"/>
+   <addaction name="exitAction"/>
   </widget>
-  <action name="action1">
+  <action name="zhenduanAction">
    <property name="icon">
     <iconset resource="image.qrc">
      <normaloff>:/new/icon/icon/1guzhang.PNG</normaloff>:/new/icon/icon/1guzhang.PNG</iconset>
@@ -89,7 +93,7 @@
     <string>故障诊断</string>
    </property>
   </action>
-  <action name="action2">
+  <action name="treeMangeAction">
    <property name="icon">
     <iconset resource="image.qrc">
      <normaloff>:/new/icon/icon/2shutu.PNG</normaloff>:/new/icon/icon/2shutu.PNG</iconset>
@@ -98,7 +102,7 @@
     <string>树图管理</string>
    </property>
   </action>
-  <action name="action4">
+  <action name="fileAction">
    <property name="icon">
     <iconset resource="image.qrc">
      <normaloff>:/new/icon/icon/4wenjian.PNG</normaloff>:/new/icon/icon/4wenjian.PNG</iconset>
@@ -107,7 +111,7 @@
     <string>文件管理</string>
    </property>
   </action>
-  <action name="action5">
+  <action name="maintrainAction">
    <property name="icon">
     <iconset resource="image.qrc">
      <normaloff>:/new/icon/icon/5xitong.PNG</normaloff>:/new/icon/icon/5xitong.PNG</iconset>
@@ -116,16 +120,16 @@
     <string>系统维护</string>
    </property>
   </action>
-  <action name="action6">
+  <action name="helpToolAction">
    <property name="icon">
     <iconset resource="image.qrc">
      <normaloff>:/new/icon/icon/6fuzhu.PNG</normaloff>:/new/icon/icon/6fuzhu.PNG</iconset>
    </property>
    <property name="text">
-    <string>系统维护</string>
+    <string>辅助工具</string>
    </property>
   </action>
-  <action name="action7">
+  <action name="exitAction">
    <property name="icon">
     <iconset resource="image.qrc">
      <normaloff>:/new/icon/icon/7tuichu.PNG</normaloff>:/new/icon/icon/7tuichu.PNG</iconset>
@@ -134,7 +138,7 @@
     <string>退出</string>
    </property>
   </action>
-  <action name="action3">
+  <action name="ruleAction">
    <property name="icon">
     <iconset resource="image.qrc">
      <normaloff>:/new/icon/icon/3guize.PNG</normaloff>:/new/icon/icon/3guize.PNG</iconset>

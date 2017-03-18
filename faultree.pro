@@ -14,13 +14,16 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         login.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    centerform.cpp
 
 HEADERS  += login.h \
-    mainwindow.h
+    mainwindow.h \
+    centerform.h
 
 FORMS    += login.ui \
-    mainwindow.ui
+    mainwindow.ui \
+    centerform.ui
 
 RESOURCES += \
     image.qrc
