@@ -7,6 +7,8 @@ MyDB::MyDB()
 
 void MyDB::connect()
 {
+    qDebug("sqlite connect");
+
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName(QString(DB_NAME));
     if (!db.open()) {

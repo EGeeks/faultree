@@ -8,6 +8,9 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    // 打开数据库
+    createDB();
+
     // 设置状态栏
     label1 = new QLabel(this);
     label1->setText("[欢迎使用数控机床人机交互系统]");
@@ -27,9 +30,6 @@ MainWindow::MainWindow(QWidget *parent) :
     // 加载核心区控件
     centerForm = new CenterForm(ui->centralwidget);
     centerForm->setGeometry(QRect(0, 0, 1019, 581));
-
-    // 打开数据库
-    createDB();
 }
 
 MainWindow::~MainWindow()
@@ -102,9 +102,12 @@ void MainWindow::createDB()
      *  ErrID    故障ID
      *  ErrDesc  节点名称
      *  ruleID   对应规则ID
+     *  alarmID  报警号ID
      */
     bsuccess = query.exec("create table IF NOT EXISTS tree " \
-                         "(nodeID INTEGER, ErrID INTEGER, ErrDesc TEXT, ruleID TEXT)");
+                         "(nodeID INTEGER, parentNodeID INTEGER, " \
+                         "ErrID INTEGER, ErrDesc TEXT, " \
+                         "ruleID TEXT, alarmID TEXT)");
     if(bsuccess == false) {
         QMessageBox::warning(NULL, "错误", "数据库创建tree失败");
     }
@@ -114,7 +117,7 @@ void MainWindow::createDB()
      *  ruleID      规则ID
      *  ErrDesc     故障信息
      *  detectTip   检测提示
-     *  depandErrID 依赖故障ID
+     *  depandErrID 依赖故障ID, 格式#1#2#3
      *  paramID     参数ID
      *  Judg        判断标准
      *  errReason   故障原因

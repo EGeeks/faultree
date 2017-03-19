@@ -1,7 +1,11 @@
 #ifndef CENTERFORM_H
 #define CENTERFORM_H
 
+#include <QDebug>
 #include <QWidget>
+#include <QResizeEvent>
+
+#include "zhenduanform.h"
 
 namespace Ui {
 class CenterForm;
@@ -17,9 +21,15 @@ public:
 
     void setCurrentWidget(int index);
 
+protected:
+    void resizeEvent(QResizeEvent *event);
+    void listNode();
+
 
 private:
     Ui::CenterForm *ui;
+
+    ZhenDuanForm *zhenDuanForm;
 };
 
 #endif // CENTERFORM_H
