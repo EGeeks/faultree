@@ -6,6 +6,7 @@
 #include <QResizeEvent>
 
 #include "zhenduanform.h"
+#include "treemanageform.h"
 
 namespace Ui {
 class CenterForm;
@@ -30,6 +31,7 @@ private:
     Ui::CenterForm *ui;
 
     ZhenDuanForm *zhenDuanForm;
+    TreeManageForm *treeManageForm;
 };
 
 #endif // CENTERFORM_H

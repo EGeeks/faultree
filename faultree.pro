@@ -17,19 +17,22 @@ SOURCES += main.cpp\
     mainwindow.cpp \
     centerform.cpp \
     mydb.cpp \
-    zhenduanform.cpp
+    zhenduanform.cpp \
+    treemanageform.cpp
 
 HEADERS  += login.h \
     mainwindow.h \
     centerform.h \
     mydb.h \
     zhenduanform.h \
-    common.h
+    common.h \
+    treemanageform.h
 
 FORMS    += login.ui \
     mainwindow.ui \
     centerform.ui \
-    zhenduanform.ui
+    zhenduanform.ui \
+    treemanageform.ui
 
 RESOURCES += \
     image.qrc

@@ -30,6 +30,9 @@ MainWindow::MainWindow(QWidget *parent) :
     // 加载核心区控件
     centerForm = new CenterForm(ui->centralwidget);
     centerForm->setGeometry(QRect(0, 0, 1019, 581));
+
+    // 显示首页
+    centerForm->setCurrentWidget(0);
 }
 
 MainWindow::~MainWindow()
@@ -56,32 +59,32 @@ void MainWindow::timerEvent(QTimerEvent *e)
 
 void MainWindow::on_zhenduanAction_triggered()
 {
-    centerForm->setCurrentWidget(0);
+    centerForm->setCurrentWidget(1);
 }
 
 void MainWindow::on_treeMangeAction_triggered()
 {
-    centerForm->setCurrentWidget(1);
+    centerForm->setCurrentWidget(2);
 }
 
 void MainWindow::on_ruleAction_triggered()
 {
-    centerForm->setCurrentWidget(2);
+    centerForm->setCurrentWidget(3);
 }
 
 void MainWindow::on_fileAction_triggered()
 {
-    centerForm->setCurrentWidget(3);
+    centerForm->setCurrentWidget(4);
 }
 
 void MainWindow::on_maintrainAction_triggered()
 {
-    centerForm->setCurrentWidget(4);
+    centerForm->setCurrentWidget(5);
 }
 
 void MainWindow::on_helpToolAction_triggered()
 {
-    centerForm->setCurrentWidget(5);
+    centerForm->setCurrentWidget(6);
 }
 
 void MainWindow::createDB()
