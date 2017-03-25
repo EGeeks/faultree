@@ -13,6 +13,9 @@ CenterForm::CenterForm(QWidget *parent) :
 
     QWidget *treeManageWidget = ui->stackedWidget->widget(2);
     treeManageForm = new TreeManageForm(treeManageWidget);
+
+    QWidget *ruleWidget = ui->stackedWidget->widget(3);
+    ruleForm = new RuleForm(ruleWidget);
 }
 
 CenterForm::~CenterForm()
@@ -30,4 +33,5 @@ void CenterForm::resizeEvent(QResizeEvent *event)
 {
     zhenDuanForm->setGeometry(0, 0, event->size().width(), event->size().height());
     treeManageForm->setGeometry(0, 0, event->size().width(), event->size().height());
+    ruleForm->setGeometry(0, 0, event->size().width(), event->size().height());
 }

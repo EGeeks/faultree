@@ -7,6 +7,7 @@
 
 #include "zhenduanform.h"
 #include "treemanageform.h"
+#include "ruleform.h"
 
 namespace Ui {
 class CenterForm;
@@ -32,6 +33,7 @@ private:
 
     ZhenDuanForm *zhenDuanForm;
     TreeManageForm *treeManageForm;
+    RuleForm *ruleForm;
 };
 
 #endif // CENTERFORM_H

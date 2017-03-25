@@ -29,7 +29,7 @@
    <item>
     <widget class="QStackedWidget" name="stackedWidget">
      <property name="currentIndex">
-      <number>2</number>
+      <number>3</number>
      </property>
      <widget class="QWidget" name="firstPage">
       <layout class="QGridLayout" name="gridLayout">
@@ -88,50 +88,19 @@
       </widget>
      </widget>
      <widget class="QWidget" name="rulePage">
-      <layout class="QGridLayout" name="gridLayout_4">
-       <item row="0" column="0">
-        <layout class="QVBoxLayout" name="verticalLayout_4">
-         <item>
-          <widget class="QPushButton" name="pushButton_6">
-           <property name="text">
-            <string>规则使用</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QListView" name="listView"/>
-         </item>
-        </layout>
-       </item>
-       <item row="0" column="1">
-        <layout class="QGridLayout" name="gridLayout_3">
-         <item row="0" column="0">
-          <widget class="QPushButton" name="pushButton_7">
-           <property name="text">
-            <string>规则管理</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="QPushButton" name="pushButton_8">
-           <property name="text">
-            <string>参数管理</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="2">
-          <widget class="QPushButton" name="pushButton_9">
-           <property name="text">
-            <string>数据库管理</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0" colspan="3">
-          <widget class="QListWidget" name="listWidget"/>
-         </item>
-        </layout>
-       </item>
-      </layout>
+      <widget class="QLabel" name="label_4">
+       <property name="geometry">
+        <rect>
+         <x>210</x>
+         <y>150</y>
+         <width>54</width>
+         <height>12</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>规则管理</string>
+       </property>
+      </widget>
      </widget>
      <widget class="QWidget" name="filePage">
       <layout class="QVBoxLayout" name="verticalLayout_5">
