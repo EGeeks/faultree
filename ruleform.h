@@ -25,6 +25,11 @@ protected:
     void addSecondNode(QStandardItem *parentItem);
     void addThirdNode(QStandardItem *parentItem);
 
+    void updateRule(QStandardItem *item);
+
+private slots:
+    void on_treeView_clicked(const QModelIndex &index);
+
 private:
     Ui::RuleForm *ui;
 };

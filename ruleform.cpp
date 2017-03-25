@@ -117,3 +117,48 @@ void RuleForm::addThirdNode(QStandardItem *parentItem)
         addThirdNode(item);
     }
 }
+
+void RuleForm::updateRule(QStandardItem *item)
+{
+    int row = 0;
+    int ruleID = item->data(DB_TREE_RULE_ID).toInt();
+
+    QSqlQuery query;
+    QString sql = QString("SELECT * FROM rule WHERE ruleID == %1")
+            .arg(ruleID);
+
+    query.exec(sql);
+    while (query.next()) {
+        int nodeID = query.value("ruleID").toInt();
+        QString errDesc = query.value("errDesc").toString();
+        QString detectTip = query.value("detectTip").toString();
+        int depandErrID = query.value("depandErrID").toInt();
+        int paramID = query.value("paramID").toInt();
+        int Judg = query.value("Judg").toInt();
+        QString errReason = query.value("errReason").toString();
+        QString Suggest = query.value("Suggest").toString();
+
+        ui->tableWidget->setRowCount(ui->tableWidget->rowCount() + 1);
+        ui->tableWidget->setItem(row, 0, new QTableWidgetItem(QString::number(nodeID)));
+        ui->tableWidget->setItem(row, 1, new QTableWidgetItem(errDesc));
+        ui->tableWidget->setItem(row, 2, new QTableWidgetItem(detectTip));
+        ui->tableWidget->setItem(row, 3, new QTableWidgetItem(QString::number(depandErrID)));
+        ui->tableWidget->setItem(row, 4, new QTableWidgetItem(QString::number(paramID)));
+        ui->tableWidget->setItem(row, 5, new QTableWidgetItem(QString::number(Judg)));
+        ui->tableWidget->setItem(row, 6, new QTableWidgetItem(errReason));
+        ui->tableWidget->setItem(row, 7, new QTableWidgetItem(Suggest));
+
+        row++;
+    }
+}
+
+void RuleForm::on_treeView_clicked(const QModelIndex &index)
+{
+    QStandardItemModel *model = (QStandardItemModel *)ui->treeView->model();
+    QStandardItem *item = model->itemFromIndex(index);
+
+    ui->tableWidget->clear();
+    ui->tableWidget->setRowCount(0);
+
+    updateRule(item);
+}
