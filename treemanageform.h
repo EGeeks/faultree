@@ -27,7 +27,9 @@ protected:
     void addThirdNode(QTreeWidgetItem *parentItem);
 
 protected slots:
-    void openAddDialog();
+    void addParnetNodeDialog();
+    void addChildNodeDialog();
+    void delNode();
 
 private slots:
     void on_treeWidget_clicked(const QModelIndex &index);

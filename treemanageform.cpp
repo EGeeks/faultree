@@ -107,11 +107,34 @@ void TreeManageForm::addThirdNode(QTreeWidgetItem *parentItem)
     }
 }
 
-//打开添加节点对话框
-void TreeManageForm::openAddDialog()
+//添加父节点
+void TreeManageForm::addParnetNodeDialog()
 {
     AddTreeNodeDialog *dialog = new AddTreeNodeDialog();
+    dialog->setParentNodeID(0);
     dialog->show();
+}
+
+//添加子节点
+void TreeManageForm::addChildNodeDialog()
+{
+    AddTreeNodeDialog *dialog = new AddTreeNodeDialog();
+    dialog->setParentNodeID(ui->treeWidget->currentItem()->data(0, DB_TREE_NODEID).toInt());
+    dialog->show();
+}
+
+// 删除节点
+void TreeManageForm::delNode()
+{
+    QTreeWidgetItem *item = ui->treeWidget->currentItem();
+
+    if(item->parent() == NULL) {
+        ui->treeWidget->takeTopLevelItem(ui->treeWidget->currentIndex().row());
+    } else {
+        item->parent()->takeChild(ui->treeWidget->currentIndex().row());
+    }
+
+    // todo 从数据库中删除
 }
 
 // 点击listview 触发
@@ -136,17 +159,20 @@ void TreeManageForm::on_treeWidget_customContextMenuRequested(const QPoint &pos)
 
     QMenu *popMenu = new QMenu(this);
     QAction *addRoot = new QAction("添加根节点", this);
-    connect(addRoot, SIGNAL(triggered()), this, SLOT(openAddDialog()));
+    connect(addRoot, SIGNAL(triggered()), this, SLOT(addChildNodeDialog()));
     popMenu->addAction(addRoot);
 
     if(item != NULL) {
         QAction *addNextNode = new QAction("添加子节点", this);
-        QAction *delNode = new QAction("删除节点", this);
-
-        connect(addNextNode, SIGNAL(triggered()), this, SLOT(openAddDialog()));
-
+        connect(addNextNode, SIGNAL(triggered()), this, SLOT(addParnetNodeDialog()));
         popMenu->addAction(addNextNode);
-        popMenu->addAction(delNode);
+
+        if(item->childCount() == 0) {
+            // 不在有子节点
+            QAction *delNode = new QAction("删除节点", this);
+            connect(delNode, SIGNAL(triggered()), this, SLOT(delNode()));
+            popMenu->addAction(delNode);
+        }
     }
 
     popMenu->exec(QCursor::pos());
