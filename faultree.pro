@@ -19,7 +19,8 @@ SOURCES += main.cpp\
     mydb.cpp \
     zhenduanform.cpp \
     treemanageform.cpp \
-    ruleform.cpp
+    ruleform.cpp \
+    addtreenodedialog.cpp
 
 HEADERS  += login.h \
     mainwindow.h \
@@ -28,14 +29,16 @@ HEADERS  += login.h \
     zhenduanform.h \
     common.h \
     treemanageform.h \
-    ruleform.h
+    ruleform.h \
+    addtreenodedialog.h
 
 FORMS    += login.ui \
     mainwindow.ui \
     centerform.ui \
     zhenduanform.ui \
     treemanageform.ui \
-    ruleform.ui
+    ruleform.ui \
+    addtreenodedialog.ui
 
 RESOURCES += \
     image.qrc
