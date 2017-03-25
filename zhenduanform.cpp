@@ -1,6 +1,7 @@
 #include "zhenduanform.h"
 #include "ui_zhenduanform.h"
 
+
 ZhenDuanForm::ZhenDuanForm(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ZhenDuanForm)
@@ -15,7 +16,7 @@ ZhenDuanForm::~ZhenDuanForm()
     delete ui;
 }
 
-
+// 创建root 节点
 void ZhenDuanForm::listAllNode()
 {
     QSqlQuery query;
@@ -26,60 +27,96 @@ void ZhenDuanForm::listAllNode()
         count = query.value(0).toInt();
     }
 
-    QStandardItemModel *model = new QStandardItemModel(count,3);
-    model->setHeaderData(0, Qt::Horizontal, tr("root"));
-    model->setHeaderData(1, Qt::Horizontal, tr("two"));
-    model->setHeaderData(2, Qt::Horizontal, tr("Err"));
+    QStandardItemModel *model = new QStandardItemModel(count,1);
+    model->setHeaderData(0, Qt::Horizontal, tr("描述"));
 
     int index = 0;
-    query.exec("SELECT nodeID,parentNodeID,ErrDesc FROM tree");
+    query.exec("SELECT * FROM tree WHERE parentNodeID == 0");
     while (query.next()) {
-        qDebug() << "SELECT:" << query.value(0).toInt() << query.value(1).toInt() << query.value(2).toString();
-
-        int nodeID = query.value(0).toInt();
-        int parentNodeID = query.value(1).toInt();
-        QString ErrDesc = query.value(2).toString();
+        int nodeID = query.value("nodeID").toInt();
+        int parentNodeID = query.value("parentNodeID").toInt();
+        int ErrID = query.value("ErrID").toInt();
+        QString ErrDesc = query.value("ErrDesc").toString();
+        int ruleID = query.value("ruleID").toInt();
+        int alarmID = query.value("alarmID").toInt();
 
         QStandardItem *item = new QStandardItem(ErrDesc);
-        item->setData(nodeID,  Qt::UserRole + 100);
+        item->setData(nodeID,  DB_TREE_NODEID);
+        item->setData(parentNodeID, DB_TREE_PARENT_NODEID);
+        item->setData(ErrID, DB_TREE_ERR_ID);
+        item->setData(ErrDesc, DB_TREE_ERR_DESC);
+        item->setData(ruleID, DB_TREE_RULE_ID);
+        item->setData(alarmID, DB_TREE_ALARM_ID);
 
-        if(parentNodeID == 0) {
-            model->setItem(index, 0, item);
-            index++;
+        model->setItem(index, 0, item);
+        addSecondNode(model->item(index));
 
-            continue;
-        }
-
-        for(int i = 0; i < index - 1; i++) {
-            int node_id = model->item(i)->data(Qt::UserRole + 100).toInt();
-            if(node_id == parentNodeID) {
-                model->item(i)->appendRow(item);
-            }
-        }
+        index++;
     }
 
-
-    //    QStandardItemModel *model = new QStandardItemModel(count,3);
-    //    model->setHeaderData(0, Qt::Horizontal, tr("root"));
-    //    model->setHeaderData(1, Qt::Horizontal, tr("two"));
-    //    model->setHeaderData(1, Qt::Horizontal, tr("Err"));
-    //    QStandardItem *item1 = new QStandardItem("avahi-daemon");
-    //    QStandardItem *item2 = new QStandardItem("bluetooth");
-    //    QStandardItem *item3 = new QStandardItem("crond");
-    //    QStandardItem *item4 = new QStandardItem("cups");
-    //    model->setItem(0, 0, item1);
-    //    model->setItem(1, 0, item2);
-    //    model->setItem(2, 0, item3);
-    //    model->setItem(3, 0, item4);
-    //    QStandardItem *item5 = new QStandardItem("fifth");
-    //    item4->appendRow(item5);
-    //    QModelIndex parent;
-    //    for (int i = 0; i < 4; ++i) {
-    //        parent = model->index(0, 0, parent);
-    //        model->insertRows(0, 1, parent);
-    //        model->insertColumns(0, 1, parent);
-    //        QModelIndex index = model->index(0, 0, parent);
-    //        model->setData(index, i);
-    //    }
     ui->treeView->setModel(model);
 }
+
+// 创建第二层 节点
+void ZhenDuanForm::addSecondNode(QStandardItem *parentItem)
+{
+    int parent_node = parentItem->data(Qt::UserRole + 100).toInt();
+
+    QSqlQuery query;
+    QString sql = QString("SELECT * FROM tree WHERE parentNodeID == %1")
+            .arg(parent_node);
+
+    query.exec(sql);
+    while (query.next()) {
+        int nodeID = query.value("nodeID").toInt();
+        int parentNodeID = query.value("parentNodeID").toInt();
+        int ErrID = query.value("ErrID").toInt();
+        QString ErrDesc = query.value("ErrDesc").toString();
+        int ruleID = query.value("ruleID").toInt();
+        int alarmID = query.value("alarmID").toInt();
+
+        QStandardItem *item = new QStandardItem(ErrDesc);
+        item->setData(nodeID,  DB_TREE_NODEID);
+        item->setData(parentNodeID, DB_TREE_PARENT_NODEID);
+        item->setData(ErrID, DB_TREE_ERR_ID);
+        item->setData(ErrDesc, DB_TREE_ERR_DESC);
+        item->setData(ruleID, DB_TREE_RULE_ID);
+        item->setData(alarmID, DB_TREE_ALARM_ID);
+
+        parentItem->appendRow(item);
+        addThirdNode(item);
+    }
+}
+
+// 创建第三层节点
+void ZhenDuanForm::addThirdNode(QStandardItem *parentItem)
+{
+    int parent_node = parentItem->data(Qt::UserRole + 100).toInt();
+
+    QSqlQuery query;
+    QString sql = QString("SELECT * FROM tree WHERE parentNodeID == %1")
+            .arg(parent_node);
+
+    query.exec(sql);
+    while (query.next()) {
+        int nodeID = query.value("nodeID").toInt();
+        int parentNodeID = query.value("parentNodeID").toInt();
+        int ErrID = query.value("ErrID").toInt();
+        QString ErrDesc = query.value("ErrDesc").toString();
+        int ruleID = query.value("ruleID").toInt();
+        int alarmID = query.value("alarmID").toInt();
+
+        QStandardItem *item = new QStandardItem(ErrDesc);
+        item->setData(nodeID,  DB_TREE_NODEID);
+        item->setData(parentNodeID, DB_TREE_PARENT_NODEID);
+        item->setData(ErrID, DB_TREE_ERR_ID);
+        item->setData(ErrDesc, DB_TREE_ERR_DESC);
+        item->setData(ruleID, DB_TREE_RULE_ID);
+        item->setData(alarmID, DB_TREE_ALARM_ID);
+
+        parentItem->appendRow(item);
+        addThirdNode(item);
+    }
+}
+
+

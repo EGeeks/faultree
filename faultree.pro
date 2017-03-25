@@ -23,7 +23,8 @@ HEADERS  += login.h \
     mainwindow.h \
     centerform.h \
     mydb.h \
-    zhenduanform.h
+    zhenduanform.h \
+    common.h
 
 FORMS    += login.ui \
     mainwindow.ui \
