@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>918</width>
-    <height>450</height>
+    <width>761</width>
+    <height>441</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -48,11 +48,6 @@
      </column>
      <column>
       <property name="text">
-       <string>故障依赖号</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
        <string>参数号</string>
       </property>
      </column>
@@ -63,12 +58,7 @@
      </column>
      <column>
       <property name="text">
-       <string>故障原因</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>建议</string>
+       <string>维修方案号</string>
       </property>
      </column>
     </widget>

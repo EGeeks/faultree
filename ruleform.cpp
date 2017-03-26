@@ -120,21 +120,18 @@ void RuleForm::updateRule(QTreeWidgetItem *item)
         int nodeID = query.value("ruleID").toInt();
         QString errDesc = query.value("errDesc").toString();
         QString detectTip = query.value("detectTip").toString();
-        int depandErrID = query.value("depandErrID").toInt();
-        int paramID = query.value("paramID").toInt();
+        QString paramID = query.value("paramID").toString();
         int Judg = query.value("Judg").toInt();
-        QString errReason = query.value("errReason").toString();
-        QString Suggest = query.value("Suggest").toString();
+        QString schemeID = query.value("schemeID").toString();
+
 
         ui->tableWidget->setRowCount(ui->tableWidget->rowCount() + 1);
         ui->tableWidget->setItem(row, 0, new QTableWidgetItem(QString::number(nodeID)));
         ui->tableWidget->setItem(row, 1, new QTableWidgetItem(errDesc));
         ui->tableWidget->setItem(row, 2, new QTableWidgetItem(detectTip));
-        ui->tableWidget->setItem(row, 3, new QTableWidgetItem(QString::number(depandErrID)));
-        ui->tableWidget->setItem(row, 4, new QTableWidgetItem(QString::number(paramID)));
-        ui->tableWidget->setItem(row, 5, new QTableWidgetItem(QString::number(Judg)));
-        ui->tableWidget->setItem(row, 6, new QTableWidgetItem(errReason));
-        ui->tableWidget->setItem(row, 7, new QTableWidgetItem(Suggest));
+        ui->tableWidget->setItem(row, 3, new QTableWidgetItem(paramID));
+        ui->tableWidget->setItem(row, 4, new QTableWidgetItem(Judg));
+        ui->tableWidget->setItem(row, 5, new QTableWidgetItem(schemeID));
 
         row++;
     }

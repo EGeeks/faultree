@@ -108,9 +108,9 @@ void MainWindow::createDB()
      *  alarmID  报警号ID
      */
     bsuccess = query.exec("create table IF NOT EXISTS tree " \
-                         "(nodeID INTEGER, parentNodeID INTEGER, " \
-                         "ErrID INTEGER, ErrDesc TEXT, " \
-                         "ruleID TEXT, alarmID TEXT)");
+                          "(nodeID INTEGER, parentNodeID INTEGER, " \
+                          "ErrID INTEGER, ErrDesc TEXT, " \
+                          "ruleID TEXT, alarmID TEXT)");
     if(bsuccess == false) {
         QMessageBox::warning(NULL, "错误", "数据库创建tree失败");
     }
@@ -120,16 +120,13 @@ void MainWindow::createDB()
      *  ruleID      规则ID
      *  ErrDesc     故障信息
      *  detectTip   检测提示
-     *  depandErrID 依赖故障ID, 格式#1#2#3
      *  paramID     参数ID
      *  Judg        判断标准
-     *  errReason   故障原因
-     *  Suggest     建议维修
+     *  schemeID    维修方案号
      */
     bsuccess = query.exec("create table IF NOT EXISTS rule " \
                           "(ruleID INTEGER, ErrDesc TEXT, detectTip TEXT, " \
-                          "depandErrID INTEGER, paramID INTEGER, Judg INTEGER, " \
-                          "errReason TEXT, Suggest TEXT)");
+                          "paramID TEXT, Judg INTEGER, schemeID TEXT)");
     if(bsuccess == false) {
         QMessageBox::warning(NULL, "错误", "数据库创建rule失败");
     }
@@ -145,6 +142,19 @@ void MainWindow::createDB()
     bsuccess = query.exec("create table IF NOT EXISTS parameter" \
                           "(paramID INTEGER, paramDesc TEXT, paramType INTEGER, " \
                           "upperLimit INTEGER, lowerLimit INTEGER)");
+    if(bsuccess == false) {
+        QMessageBox::warning(NULL, "错误", "数据库创建parameter失败");
+    }
+
+
+    /*
+     *  scheme 表
+     *  schemeID    方案ID
+     *  schemeDesc  方案描述
+     *  repair      维修步骤
+     */
+    bsuccess = query.exec("create table IF NOT EXISTS scheme" \
+                          "(schemeID TEXT, schemeDesc TEXT, repair TEXT)");
     if(bsuccess == false) {
         QMessageBox::warning(NULL, "错误", "数据库创建parameter失败");
     }

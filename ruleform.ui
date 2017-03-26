@@ -17,11 +17,17 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
-      <widget class="QPushButton" name="pushButton_6">
-       <property name="text">
-        <string>规则使用</string>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
        </property>
-      </widget>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
      </item>
      <item>
       <widget class="QPushButton" name="pushButton_ruleManage">
@@ -78,11 +84,6 @@
        </column>
        <column>
         <property name="text">
-         <string>故障依赖号</string>
-        </property>
-       </column>
-       <column>
-        <property name="text">
          <string>参数号</string>
         </property>
        </column>
@@ -93,12 +94,7 @@
        </column>
        <column>
         <property name="text">
-         <string>故障原因</string>
-        </property>
-       </column>
-       <column>
-        <property name="text">
-         <string>建议</string>
+         <string>维修方案号</string>
         </property>
        </column>
       </widget>

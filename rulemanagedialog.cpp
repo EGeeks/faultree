@@ -25,31 +25,25 @@ void RuleManageDialog::listDB()
         int ruleID = query.value("ruleID").toInt();
         QString errDesc = query.value("errDesc").toString();
         QString detectTip = query.value("detectTip").toString();
-        int depandErrID = query.value("depandErrID").toInt();
-        int paramID = query.value("paramID").toInt();
+        QString paramID = query.value("paramID").toString();
         int Judg = query.value("Judg").toInt();
-        QString errReason = query.value("errReason").toString();
-        QString Suggest = query.value("Suggest").toString();
+        QString schemeID = query.value("schemeID").toString();
 
         QTableWidgetItem *firstItem = new QTableWidgetItem(QString::number(ruleID));
         firstItem->setData(DB_RULE_RULEID, ruleID);
         firstItem->setData(DB_RULE_ERR_DESC, errDesc);
         firstItem->setData(DB_RULE_DETECT_TIP, detectTip);
-        firstItem->setData(DB_RULE_DEPAND_ERRID, depandErrID);
         firstItem->setData(DB_RULE_PARAMID, paramID);
         firstItem->setData(DB_RULE_JUDG, Judg);
-        firstItem->setData(DB_RULE_ERR_REASON, errReason);
-        firstItem->setData(DB_RULE_SUGGEST, Suggest);
+        firstItem->setData(DB_RULE_SCHEMEID, schemeID);
 
         ui->tableWidget->setRowCount(ui->tableWidget->rowCount() + 1);
         ui->tableWidget->setItem(row, 0, firstItem);
         ui->tableWidget->setItem(row, 1, new QTableWidgetItem(errDesc));
         ui->tableWidget->setItem(row, 2, new QTableWidgetItem(detectTip));
-        ui->tableWidget->setItem(row, 3, new QTableWidgetItem(QString::number(depandErrID)));
-        ui->tableWidget->setItem(row, 4, new QTableWidgetItem(QString::number(paramID)));
-        ui->tableWidget->setItem(row, 5, new QTableWidgetItem(QString::number(Judg)));
-        ui->tableWidget->setItem(row, 6, new QTableWidgetItem(errReason));
-        ui->tableWidget->setItem(row, 7, new QTableWidgetItem(Suggest));
+        ui->tableWidget->setItem(row, 3, new QTableWidgetItem(paramID));
+        ui->tableWidget->setItem(row, 4, new QTableWidgetItem(QString::number(Judg)));
+        ui->tableWidget->setItem(row, 5, new QTableWidgetItem(schemeID));
 
         row++;
     }
@@ -107,17 +101,15 @@ void RuleManageDialog::on_editPushButton_clicked()
     int ruleID = firstItem->data(DB_RULE_RULEID).toInt();
     QString errDesc = firstItem->data(DB_RULE_ERR_DESC).toString();
     QString detectTip = firstItem->data(DB_RULE_DETECT_TIP).toString();
-    int depandErrID = firstItem->data(DB_RULE_DEPAND_ERRID).toInt();
-    int paramID = firstItem->data(DB_RULE_PARAMID).toInt();
+    QString paramID = firstItem->data(DB_RULE_PARAMID).toString();
     int Judg = firstItem->data(DB_RULE_JUDG).toInt();
-    QString errReason = firstItem->data(DB_RULE_ERR_REASON).toString();
-    QString Suggest = firstItem->data(DB_RULE_SUGGEST).toString();
+    QString schemeID = firstItem->data(DB_RULE_SCHEMEID).toString();
 
 
     RuleEditDialog *ruleEditDialog = new RuleEditDialog();
     ruleEditDialog->setMode(false);
-    ruleEditDialog->setRuleEditData(ruleID, errDesc, detectTip, depandErrID,
-                                    paramID, Judg, errReason, Suggest);
+    ruleEditDialog->setRuleEditData(ruleID, errDesc, detectTip,
+                                    paramID, Judg, schemeID);
     ruleEditDialog->exec();
 
     // 刷新tab

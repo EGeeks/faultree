@@ -9,8 +9,6 @@ RuleEditDialog::RuleEditDialog(QWidget *parent) :
 
     class QValidator *validator=new QIntValidator(0,999999,this);
     ui->lineEdit_ruleID_2->setValidator(validator);
-    ui->lineEdit_depandErrID->setValidator(validator);
-    ui->lineEdit_paramID->setValidator(validator);
 
     // 默认添加
     m_mode = true;
@@ -31,17 +29,14 @@ void RuleEditDialog::setMode(bool mode)
 }
 
 void RuleEditDialog::setRuleEditData(int ruleID, QString errDesc, QString detectTip,
-                                     int depandErrID, int paramID, int Judg,
-                                     QString errReason, QString Suggest)
+                                     QString paramID, int Judg, QString schemeID)
 {
     ui->lineEdit_ruleID_2->setText(QString::number(ruleID));
     ui->lineEdit_errDesc->setText(errDesc);
     ui->lineEdit_detectTip->setText(detectTip);
-    ui->lineEdit_depandErrID->setText(QString::number(depandErrID));
-    ui->lineEdit_paramID->setText(QString::number(paramID));
+    ui->lineEdit_paramID->setText(paramID);
     //todo Judg
-    ui->lineEdit_errReason->setText(errReason);
-    ui->lineEdit_Suggest->setText(Suggest);
+    ui->lineEdit_schemeID->setText(schemeID);
 }
 
 void RuleEditDialog::on_pushButton_clicked()
@@ -51,16 +46,15 @@ void RuleEditDialog::on_pushButton_clicked()
     if(m_mode == true) {
         // 添加
         QString sql = QString("INSERT INTO rule " \
-                              "(ruleID, ErrDesc, detectTip, depandErrID, paramID, Judg, errReason, Suggest) "
-                              "VALUES(%1, '%2', '%3', %4, %5, %6, '%7', '%8');")
+                              "(ruleID, ErrDesc, detectTip, paramID, Judg, schemeID) "
+                              "VALUES(%1, '%2', '%3', '%4', %5, '%6');")
                 .arg(ui->lineEdit_ruleID_2->text().toInt())
                 .arg(ui->lineEdit_errDesc->text())
                 .arg(ui->lineEdit_detectTip->text())
-                .arg(ui->lineEdit_depandErrID->text().toInt())
-                .arg(ui->lineEdit_paramID->text().toInt())
+                .arg(ui->lineEdit_paramID->text())
                 .arg(0)
-                .arg(ui->lineEdit_errReason->text())
-                .arg(ui->lineEdit_Suggest->text());
+                .arg(ui->lineEdit_schemeID->text());
+
 
         qDebug() << "sql_1: " <<  sql;
         query.exec(sql);
@@ -68,16 +62,14 @@ void RuleEditDialog::on_pushButton_clicked()
         // 编辑
         QString sql = QString("UPDATE rule SET " \
                               "ErrDesc='%1', detectTip='%2', " \
-                              "depandErrID=%3, paramID=%4, Judg=%5, " \
-                              "errReason='%6', Suggest='%7' WHERE ruleID=%8;")
+                              "paramID=%3, Judg=%4, " \
+                              "schemeID='%5' WHERE ruleID=%6;")
                 .arg(ui->lineEdit_errDesc->text())
                 .arg(ui->lineEdit_detectTip->text())
-                .arg(ui->lineEdit_depandErrID->text().toInt())
-                .arg(ui->lineEdit_paramID->text().toInt())
+                .arg(ui->lineEdit_paramID->text())
                 .arg(0)
-                .arg(ui->lineEdit_errReason->text())
-                .arg(ui->lineEdit_Suggest->text())
-                .arg(ui->lineEdit_ruleID_2->text().toInt());
+                .arg(ui->lineEdit_schemeID->text())
+                .arg(ui->lineEdit_ruleID_2->text());
 
         qDebug() << "sql_2: " <<  sql;
         query.exec(sql);

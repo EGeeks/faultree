@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>439</width>
-    <height>353</height>
+    <width>341</width>
+    <height>246</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -67,27 +67,6 @@
     </layout>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_10">
-     <item>
-      <widget class="QLabel" name="label_12">
-       <property name="text">
-        <string>依赖故障号：</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLineEdit" name="lineEdit_depandErrID"/>
-     </item>
-     <item>
-      <widget class="QLabel" name="label_17">
-       <property name="text">
-        <string>范围0~999999</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item>
     <layout class="QHBoxLayout" name="horizontalLayout_11">
      <item>
       <widget class="QLabel" name="label_13">
@@ -98,13 +77,6 @@
      </item>
      <item>
       <widget class="QLineEdit" name="lineEdit_paramID"/>
-     </item>
-     <item>
-      <widget class="QLabel" name="label_18">
-       <property name="text">
-        <string>范围0~999999</string>
-       </property>
-      </widget>
      </item>
     </layout>
    </item>
@@ -136,30 +108,16 @@
     </layout>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_12">
+    <layout class="QHBoxLayout" name="horizontalLayout_10">
      <item>
-      <widget class="QLabel" name="label_15">
+      <widget class="QLabel" name="label_12">
        <property name="text">
-        <string>故障原因：</string>
+        <string>维修方案ID：</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit_errReason"/>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_13">
-     <item>
-      <widget class="QLabel" name="label_16">
-       <property name="text">
-        <string>建议：</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLineEdit" name="lineEdit_Suggest"/>
+      <widget class="QLineEdit" name="lineEdit_schemeID"/>
      </item>
     </layout>
    </item>
