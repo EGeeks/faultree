@@ -29,6 +29,8 @@ protected:
 
 private slots:
     void on_treeWidget_clicked(const QModelIndex &index);
+    void on_pushButton_ruleManage_clicked();
+    void on_pushButton_paramManage_clicked();
 
 private:
     Ui::RuleForm *ui;

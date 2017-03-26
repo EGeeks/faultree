@@ -20,7 +20,10 @@ SOURCES += main.cpp\
     zhenduanform.cpp \
     treemanageform.cpp \
     ruleform.cpp \
-    addtreenodedialog.cpp
+    addtreenodedialog.cpp \
+    rulemanagedialog.cpp \
+    parammanagedialog.cpp \
+    ruleeditdialog.cpp
 
 HEADERS  += login.h \
     mainwindow.h \
@@ -30,7 +33,10 @@ HEADERS  += login.h \
     common.h \
     treemanageform.h \
     ruleform.h \
-    addtreenodedialog.h
+    addtreenodedialog.h \
+    rulemanagedialog.h \
+    parammanagedialog.h \
+    ruleeditdialog.h
 
 FORMS    += login.ui \
     mainwindow.ui \
@@ -38,7 +44,10 @@ FORMS    += login.ui \
     zhenduanform.ui \
     treemanageform.ui \
     ruleform.ui \
-    addtreenodedialog.ui
+    addtreenodedialog.ui \
+    rulemanagedialog.ui \
+    parammanagedialog.ui \
+    ruleeditdialog.ui
 
 RESOURCES += \
     image.qrc

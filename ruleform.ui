@@ -24,14 +24,14 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_7">
+      <widget class="QPushButton" name="pushButton_ruleManage">
        <property name="text">
         <string>规则管理</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_8">
+      <widget class="QPushButton" name="pushButton_paramManage">
        <property name="text">
         <string>参数管理</string>
        </property>

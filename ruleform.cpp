@@ -1,5 +1,7 @@
 #include "ruleform.h"
 #include "ui_ruleform.h"
+#include "rulemanagedialog.h"
+#include "parammanagedialog.h"
 
 RuleForm::RuleForm(QWidget *parent) :
     QWidget(parent),
@@ -140,10 +142,26 @@ void RuleForm::updateRule(QTreeWidgetItem *item)
 
 void RuleForm::on_treeWidget_clicked(const QModelIndex &index)
 {
+    Q_UNUSED(index);
+
     QTreeWidgetItem *item = ui->treeWidget->currentItem();
 
     ui->tableWidget->clear();
     ui->tableWidget->setRowCount(0);
 
     updateRule(item);
+}
+
+// 打开规则管理窗口
+void RuleForm::on_pushButton_ruleManage_clicked()
+{
+    RuleManageDialog *ruleManageDialog = new RuleManageDialog();
+    ruleManageDialog->show();
+}
+
+// 打开参数管理窗口
+void RuleForm::on_pushButton_paramManage_clicked()
+{
+    ParamManageDialog *paramManageDialog = new ParamManageDialog();
+    paramManageDialog->show();
 }
