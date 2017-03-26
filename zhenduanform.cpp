@@ -106,4 +106,82 @@ void ZhenDuanForm::addThirdNode(QTreeWidgetItem *parentItem)
     }
 }
 
+// 根据关键字搜索
+void ZhenDuanForm::searchByKeyword(QString keyword)
+{
+    for(int n = 0; n < ui->treeWidget->topLevelItemCount(); n++) {
+        QTreeWidgetItem *topItem = ui->treeWidget->topLevelItem(n);
+
+        for(int m = 0; m < topItem->childCount(); m++) {
+            QTreeWidgetItem *itemChildOne = topItem->child(m);
+            QString ErrDescOne = itemChildOne->data(0, DB_TREE_ERR_DESC).toString();
+            if(ErrDescOne.indexOf(keyword, Qt::CaseInsensitive) != -1)
+                ui->treeWidget->expandItem(topItem);
+
+            for(int s = 0; s < itemChildOne->childCount(); s++) {
+                QTreeWidgetItem *itemChildTwo = itemChildOne->child(s);
+                QString ErrDescTwo = itemChildTwo->data(0, DB_TREE_ERR_DESC).toString();
+                if(ErrDescTwo.indexOf(keyword, Qt::CaseInsensitive) != -1) {
+                    ui->treeWidget->expandItem(itemChildOne);
+                    ui->treeWidget->expandItem(topItem);
+                }
+            }
+        }
+    }
+}
+
+// 根据alarmID 搜索
+void ZhenDuanForm::searchByAlarmID(QString alarmID)
+{
+    for(int n = 0; n < ui->treeWidget->topLevelItemCount(); n++) {
+        QTreeWidgetItem *topItem = ui->treeWidget->topLevelItem(n);
+
+        for(int m = 0; m < topItem->childCount(); m++) {
+            QTreeWidgetItem *itemChildOne = topItem->child(m);
+            QString alarmIDone = itemChildOne->data(0, DB_TREE_ALARM_ID).toString();
+            if(alarmIDone.indexOf(alarmID) != -1)
+                ui->treeWidget->expandItem(topItem);
+
+            for(int s = 0; s < itemChildOne->childCount(); s++) {
+                QTreeWidgetItem *itemChildTwo = itemChildOne->child(s);
+                QString alarmIDtwo = itemChildTwo->data(0, DB_TREE_ALARM_ID).toString();
+                if(alarmIDtwo.indexOf(alarmID) != -1) {
+                    ui->treeWidget->expandItem(itemChildOne);
+                    ui->treeWidget->expandItem(topItem);
+                }
+            }
+        }
+    }
+}
+
+void ZhenDuanForm::on_radioButton_keyWord_toggled(bool checked)
+{
+    Q_UNUSED(checked);
+
+    // 清空搜索框
+    ui->lineEdit_search->clear();
+}
+
+void ZhenDuanForm::on_radioButton_alarmID_toggled(bool checked)
+{
+    Q_UNUSED(checked);
+
+    // 清空搜索框
+    ui->lineEdit_search->clear();
+}
+
+// 关键字变化触发搜索
+void ZhenDuanForm::on_lineEdit_search_textChanged(const QString &arg1)
+{
+    if(ui->lineEdit_search->text().isEmpty())
+        return;
+
+    ui->treeWidget->collapseAll();
+
+    if(ui->radioButton_keyWord->isChecked() == true) {
+        searchByKeyword(arg1);
+    } else if(ui->radioButton_alarmID->isChecked() == true) {
+        searchByAlarmID(arg1);
+    }
+}
 

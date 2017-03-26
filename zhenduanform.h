@@ -26,6 +26,14 @@ protected:
     void addSecondNode(QTreeWidgetItem *parentItem);
     void addThirdNode(QTreeWidgetItem *parentItem);
 
+    void searchByKeyword(QString keyword);
+    void searchByAlarmID(QString alarmID);
+
+private slots:
+    void on_radioButton_keyWord_toggled(bool checked);
+    void on_radioButton_alarmID_toggled(bool checked);
+    void on_lineEdit_search_textChanged(const QString &arg1);
+
 private:
     Ui::ZhenDuanForm *ui;
 };
