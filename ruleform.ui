@@ -43,6 +43,13 @@
        </property>
       </widget>
      </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_schemeManage">
+       <property name="text">
+        <string>维修方案管理</string>
+       </property>
+      </widget>
+     </item>
     </layout>
    </item>
    <item>

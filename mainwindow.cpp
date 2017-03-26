@@ -108,7 +108,7 @@ void MainWindow::createDB()
      *  alarmID  报警号ID
      */
     bsuccess = query.exec("create table IF NOT EXISTS tree " \
-                          "(nodeID INTEGER, parentNodeID INTEGER, " \
+                          "(nodeID INTEGER unique, parentNodeID INTEGER, " \
                           "ErrID INTEGER, ErrDesc TEXT, " \
                           "ruleID TEXT, alarmID TEXT)");
     if(bsuccess == false) {
@@ -125,7 +125,7 @@ void MainWindow::createDB()
      *  schemeID    维修方案号
      */
     bsuccess = query.exec("create table IF NOT EXISTS rule " \
-                          "(ruleID INTEGER, ErrDesc TEXT, detectTip TEXT, " \
+                          "(ruleID INTEGER unique, ErrDesc TEXT, detectTip TEXT, " \
                           "paramID TEXT, Judg INTEGER, schemeID TEXT)");
     if(bsuccess == false) {
         QMessageBox::warning(NULL, "错误", "数据库创建rule失败");
@@ -140,7 +140,7 @@ void MainWindow::createDB()
      *  lowerLimit  下限
      */
     bsuccess = query.exec("create table IF NOT EXISTS parameter" \
-                          "(paramID INTEGER, paramDesc TEXT, paramType INTEGER, " \
+                          "(paramID INTEGER unique, paramDesc TEXT, paramType INTEGER, " \
                           "upperLimit INTEGER, lowerLimit INTEGER)");
     if(bsuccess == false) {
         QMessageBox::warning(NULL, "错误", "数据库创建parameter失败");
@@ -154,7 +154,7 @@ void MainWindow::createDB()
      *  repair      维修步骤
      */
     bsuccess = query.exec("create table IF NOT EXISTS scheme" \
-                          "(schemeID TEXT, schemeDesc TEXT, repair TEXT)");
+                          "(schemeID TEXT unique, schemeDesc TEXT, repair TEXT)");
     if(bsuccess == false) {
         QMessageBox::warning(NULL, "错误", "数据库创建parameter失败");
     }

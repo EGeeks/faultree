@@ -32,6 +32,8 @@ private slots:
     void on_pushButton_ruleManage_clicked();
     void on_pushButton_paramManage_clicked();
 
+    void on_pushButton_schemeManage_clicked();
+
 private:
     Ui::RuleForm *ui;
 };

@@ -2,6 +2,7 @@
 #include "ui_ruleform.h"
 #include "rulemanagedialog.h"
 #include "parammanagedialog.h"
+#include "schememanagedialog.h"
 
 RuleForm::RuleForm(QWidget *parent) :
     QWidget(parent),
@@ -162,4 +163,11 @@ void RuleForm::on_pushButton_paramManage_clicked()
 {
     ParamManageDialog *paramManageDialog = new ParamManageDialog();
     paramManageDialog->show();
+}
+
+// 打开维修方案管理窗口
+void RuleForm::on_pushButton_schemeManage_clicked()
+{
+    SchemeManageDialog *schemeManageDialog = new SchemeManageDialog();
+    schemeManageDialog->show();
 }

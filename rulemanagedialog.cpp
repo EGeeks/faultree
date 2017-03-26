@@ -71,6 +71,9 @@ void RuleManageDialog::on_delPushButton_clicked()
 {
     int currentRow = ui->tableWidget->currentIndex().row();
     QTableWidgetItem *firstItem = ui->tableWidget->item(currentRow, 0);
+    if(firstItem == NULL)
+        return;
+
 
     int ruleID = firstItem->data(DB_RULE_RULEID).toInt();
     QString errDesc = firstItem->data(DB_RULE_ERR_DESC).toString();
@@ -97,6 +100,9 @@ void RuleManageDialog::on_editPushButton_clicked()
 {
     int currentRow = ui->tableWidget->currentIndex().row();
     QTableWidgetItem *firstItem = ui->tableWidget->item(currentRow, 0);
+    if(firstItem == NULL)
+        return;
+
 
     int ruleID = firstItem->data(DB_RULE_RULEID).toInt();
     QString errDesc = firstItem->data(DB_RULE_ERR_DESC).toString();

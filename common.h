@@ -31,4 +31,11 @@ enum DBParamKey {
     DB_PARAM_PARAM_LOWER_LIMIT
 };
 
+//对应scheme 表中的属性
+enum DBSchemeKey {
+    DB_SCHEME_ID = Qt::UserRole + 100,
+    DB_SCHEME_DESC,
+    DB_SCHEME_REPAIR,
+};
+
 #endif // COMMON_H

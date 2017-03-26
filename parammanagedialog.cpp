@@ -66,6 +66,9 @@ void ParamManageDialog::on_delPushButton_clicked()
 {
     int currentRow = ui->tableWidget->currentIndex().row();
     QTableWidgetItem *firstItem = ui->tableWidget->item(currentRow, 0);
+    if(firstItem == NULL)
+        return;
+
 
     int paramID = firstItem->data(DB_PARAM_PARAMID).toInt();
     QString paramDesc = firstItem->data(DB_PARAM_PARAM_DESC).toString();
@@ -92,6 +95,9 @@ void ParamManageDialog::on_editPushButton_clicked()
 {
     int currentRow = ui->tableWidget->currentIndex().row();
     QTableWidgetItem *firstItem = ui->tableWidget->item(currentRow, 0);
+    if(firstItem == NULL)
+        return;
+
 
     int paramID = firstItem->data(DB_PARAM_PARAMID).toInt();
     QString paramDesc = firstItem->data(DB_PARAM_PARAM_DESC).toString();
