@@ -23,7 +23,8 @@ SOURCES += main.cpp\
     addtreenodedialog.cpp \
     rulemanagedialog.cpp \
     parammanagedialog.cpp \
-    ruleeditdialog.cpp
+    ruleeditdialog.cpp \
+    parameditdialog.cpp
 
 HEADERS  += login.h \
     mainwindow.h \
@@ -36,7 +37,8 @@ HEADERS  += login.h \
     addtreenodedialog.h \
     rulemanagedialog.h \
     parammanagedialog.h \
-    ruleeditdialog.h
+    ruleeditdialog.h \
+    parameditdialog.h
 
 FORMS    += login.ui \
     mainwindow.ui \
@@ -47,7 +49,8 @@ FORMS    += login.ui \
     addtreenodedialog.ui \
     rulemanagedialog.ui \
     parammanagedialog.ui \
-    ruleeditdialog.ui
+    ruleeditdialog.ui \
+    parameditdialog.ui
 
 RESOURCES += \
     image.qrc

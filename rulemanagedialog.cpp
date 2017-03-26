@@ -67,8 +67,9 @@ void RuleManageDialog::on_addPushButton_clicked()
     ruleEditDialog->exec();
 
     // 刷新tab
-    for(int i = 0; i < ui->tableWidget->rowCount(); i++)
-        ui->tableWidget->removeRow(i);
+    int len = ui->tableWidget->rowCount();
+    for(int i = 0; i < len; i++)
+        ui->tableWidget->removeRow(0);
     listDB();
 }
 
@@ -92,8 +93,9 @@ void RuleManageDialog::on_delPushButton_clicked()
 
 
     // 刷新tab
-    for(int i = 0; i < ui->tableWidget->rowCount(); i++)
-        ui->tableWidget->removeRow(i);
+    int len = ui->tableWidget->rowCount();
+    for(int i = 0; i < len; i++)
+        ui->tableWidget->removeRow(0);
     listDB();
 }
 
@@ -119,8 +121,9 @@ void RuleManageDialog::on_editPushButton_clicked()
     ruleEditDialog->exec();
 
     // 刷新tab
-    for(int i = 0; i < ui->tableWidget->rowCount(); i++)
-        ui->tableWidget->removeRow(i);
+    int len = ui->tableWidget->rowCount();
+    for(int i = 0; i < len; i++)
+        ui->tableWidget->removeRow(0);
     listDB();
 }
 

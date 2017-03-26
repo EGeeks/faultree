@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>RuleEditDialog</class>
- <widget class="QDialog" name="RuleEditDialog">
+ <class>ParamEditDialog</class>
+ <widget class="QDialog" name="ParamEditDialog">
   <property name="windowModality">
    <enum>Qt::ApplicationModal</enum>
   </property>
@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>439</width>
-    <height>353</height>
+    <width>415</width>
+    <height>242</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -22,12 +22,12 @@
      <item>
       <widget class="QLabel" name="label_6">
        <property name="text">
-        <string>规则ID：</string>
+        <string>参数ID：</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit_ruleID_2"/>
+      <widget class="QLineEdit" name="lineEdit_paramID"/>
      </item>
      <item>
       <widget class="QLabel" name="label_14">
@@ -43,12 +43,12 @@
      <item>
       <widget class="QLabel" name="label_10">
        <property name="text">
-        <string>故障描述：</string>
+        <string>参数描述：</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit_errDesc"/>
+      <widget class="QLineEdit" name="lineEdit_paramDesc"/>
      </item>
     </layout>
    </item>
@@ -57,12 +57,12 @@
      <item>
       <widget class="QLabel" name="label_11">
        <property name="text">
-        <string>检查提示：</string>
+        <string>参数类型：</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit_detectTip"/>
+      <widget class="QLineEdit" name="lineEdit_paramType"/>
      </item>
     </layout>
    </item>
@@ -71,12 +71,12 @@
      <item>
       <widget class="QLabel" name="label_12">
        <property name="text">
-        <string>依赖故障号：</string>
+        <string>上限：</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit_depandErrID"/>
+      <widget class="QLineEdit" name="lineEdit_upperLimit"/>
      </item>
      <item>
       <widget class="QLabel" name="label_17">
@@ -92,12 +92,12 @@
      <item>
       <widget class="QLabel" name="label_13">
        <property name="text">
-        <string>参数ID:</string>
+        <string>下限</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit_paramID"/>
+      <widget class="QLineEdit" name="lineEdit_lowLimit"/>
      </item>
      <item>
       <widget class="QLabel" name="label_18">
@@ -105,61 +105,6 @@
         <string>范围0~999999</string>
        </property>
       </widget>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_15">
-     <item>
-      <widget class="QCheckBox" name="checkBox">
-       <property name="layoutDirection">
-        <enum>Qt::RightToLeft</enum>
-       </property>
-       <property name="text">
-        <string>是否判断：</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer_2">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_12">
-     <item>
-      <widget class="QLabel" name="label_15">
-       <property name="text">
-        <string>故障原因：</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLineEdit" name="lineEdit_errReason"/>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_13">
-     <item>
-      <widget class="QLabel" name="label_16">
-       <property name="text">
-        <string>建议：</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLineEdit" name="lineEdit_Suggest"/>
      </item>
     </layout>
    </item>

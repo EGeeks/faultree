@@ -69,7 +69,6 @@ void AddTreeNodeDialog::on_addPushButton_clicked()
     QString alarmID = ui->lineEdit_alarmID->text();
 
 
-
     QSqlQuery query;
     QString sql = QString("INSERT INTO tree " \
                           "(nodeID, parentNodeID, ErrID, ErrDesc, ruleID, alarmID) "

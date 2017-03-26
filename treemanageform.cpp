@@ -112,7 +112,7 @@ void TreeManageForm::addParnetNodeDialog()
 {
     AddTreeNodeDialog *dialog = new AddTreeNodeDialog();
     dialog->setParentNodeID(0);
-    dialog->show();
+    dialog->exec();
 }
 
 //添加子节点
@@ -165,12 +165,12 @@ void TreeManageForm::on_treeWidget_customContextMenuRequested(const QPoint &pos)
 
     QMenu *popMenu = new QMenu(this);
     QAction *addRoot = new QAction("添加根节点", this);
-    connect(addRoot, SIGNAL(triggered()), this, SLOT(addChildNodeDialog()));
+    connect(addRoot, SIGNAL(triggered()), this, SLOT(addParnetNodeDialog()));
     popMenu->addAction(addRoot);
 
     if(item != NULL) {
         QAction *addNextNode = new QAction("添加子节点", this);
-        connect(addNextNode, SIGNAL(triggered()), this, SLOT(addParnetNodeDialog()));
+        connect(addNextNode, SIGNAL(triggered()), this, SLOT(addChildNodeDialog()));
         popMenu->addAction(addNextNode);
 
         if(item->childCount() == 0) {

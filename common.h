@@ -24,4 +24,13 @@ enum DBRuleKey {
     DB_RULE_SUGGEST
 };
 
+//对应parameter 表中的属性
+enum DBParamKey {
+    DB_PARAM_PARAMID = Qt::UserRole + 100,
+    DB_PARAM_PARAM_DESC,
+    DB_PARAM_PARAM_TYPE,
+    DB_PARAM_PARAM_UPPER_LIMIT,
+    DB_PARAM_PARAM_LOWER_LIMIT
+};
+
 #endif // COMMON_H
