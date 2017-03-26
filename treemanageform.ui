@@ -108,27 +108,6 @@
         </property>
        </spacer>
       </item>
-      <item row="2" column="2">
-       <widget class="QPushButton" name="pushButton_5">
-        <property name="text">
-         <string>删除节点</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1">
-       <widget class="QPushButton" name="pushButton_4">
-        <property name="text">
-         <string>添加子节点</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0">
-       <widget class="QPushButton" name="pushButton_3">
-        <property name="text">
-         <string>添加根节点</string>
-        </property>
-       </widget>
-      </item>
       <item row="1" column="1">
        <spacer name="verticalSpacer">
         <property name="orientation">
@@ -144,9 +123,6 @@
       </item>
      </layout>
      <zorder>horizontalSpacer</zorder>
-     <zorder>pushButton_3</zorder>
-     <zorder>pushButton_4</zorder>
-     <zorder>pushButton_5</zorder>
      <zorder>verticalSpacer</zorder>
     </widget>
    </item>

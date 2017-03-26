@@ -134,7 +134,13 @@ void TreeManageForm::delNode()
         item->parent()->takeChild(ui->treeWidget->currentIndex().row());
     }
 
-    // todo 从数据库中删除
+    // 从数据库中删除
+    int nodeID = item->data(0, DB_TREE_NODEID).toInt();
+
+    QSqlQuery query;
+    QString sql = QString("DELETE FROM tree WHERE nodeID=%1")
+            .arg(nodeID);
+    query.exec(sql);
 }
 
 // 点击listview 触发
