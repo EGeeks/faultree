@@ -14,7 +14,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>参数管理</string>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout">
    <item>

@@ -146,9 +146,10 @@ void RuleForm::on_treeWidget_clicked(const QModelIndex &index)
 
     QTreeWidgetItem *item = ui->treeWidget->currentItem();
 
-    ui->tableWidget->clear();
-    ui->tableWidget->setRowCount(0);
-
+    // 刷新tab
+    int len = ui->tableWidget->rowCount();
+    for(int i = 0; i < len; i++)
+        ui->tableWidget->removeRow(0);
     updateRule(item);
 }
 

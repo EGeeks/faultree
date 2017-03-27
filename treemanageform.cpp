@@ -113,6 +113,29 @@ void TreeManageForm::addParnetNodeDialog()
     AddTreeNodeDialog *dialog = new AddTreeNodeDialog();
     dialog->setParentNodeID(0);
     dialog->exec();
+
+    qDebug() << "nodeID : " << dialog->getNodeID();
+    QSqlQuery query;
+    QString sql = QString("SELECT * FROM tree WHERE nodeID == %1").arg(dialog->getNodeID());
+    query.exec(sql);
+    while (query.next()) {
+        int nodeID = query.value("nodeID").toInt();
+        int parentNodeID = query.value("parentNodeID").toInt();
+        int ErrID = query.value("ErrID").toInt();
+        QString ErrDesc = query.value("ErrDesc").toString();
+        QString ruleID = query.value("ruleID").toString();
+        QString alarmID = query.value("alarmID").toString();
+
+        QTreeWidgetItem *item = new QTreeWidgetItem(QStringList() << ErrDesc);
+        item->setData(0, DB_TREE_NODEID, nodeID);
+        item->setData(0, DB_TREE_PARENT_NODEID, parentNodeID);
+        item->setData(0, DB_TREE_ERR_ID, ErrID);
+        item->setData(0, DB_TREE_ERR_DESC, ErrDesc);
+        item->setData(0, DB_TREE_RULE_ID, ruleID);
+        item->setData(0, DB_TREE_ALARM_ID, alarmID);
+
+        ui->treeWidget->addTopLevelItem(item);
+    }
 }
 
 //添加子节点
@@ -120,7 +143,30 @@ void TreeManageForm::addChildNodeDialog()
 {
     AddTreeNodeDialog *dialog = new AddTreeNodeDialog();
     dialog->setParentNodeID(ui->treeWidget->currentItem()->data(0, DB_TREE_NODEID).toInt());
-    dialog->show();
+    dialog->exec();
+
+    qDebug() << "nodeID : " << dialog->getNodeID();
+    QSqlQuery query;
+    QString sql = QString("SELECT * FROM tree WHERE nodeID == %1").arg(dialog->getNodeID());
+    query.exec(sql);
+    while (query.next()) {
+        int nodeID = query.value("nodeID").toInt();
+        int parentNodeID = query.value("parentNodeID").toInt();
+        int ErrID = query.value("ErrID").toInt();
+        QString ErrDesc = query.value("ErrDesc").toString();
+        QString ruleID = query.value("ruleID").toString();
+        QString alarmID = query.value("alarmID").toString();
+
+        QTreeWidgetItem *item = new QTreeWidgetItem(QStringList() << ErrDesc);
+        item->setData(0, DB_TREE_NODEID, nodeID);
+        item->setData(0, DB_TREE_PARENT_NODEID, parentNodeID);
+        item->setData(0, DB_TREE_ERR_ID, ErrID);
+        item->setData(0, DB_TREE_ERR_DESC, ErrDesc);
+        item->setData(0, DB_TREE_RULE_ID, ruleID);
+        item->setData(0, DB_TREE_ALARM_ID, alarmID);
+
+        ui->treeWidget->currentItem()->addChild(item);
+    }
 }
 
 // 删除节点
@@ -146,6 +192,8 @@ void TreeManageForm::delNode()
 // 点击listview 触发
 void TreeManageForm::on_treeWidget_clicked(const QModelIndex &index)
 {
+    Q_UNUSED(index);
+
     QTreeWidgetItem *item = ui->treeWidget->currentItem();
 
     int nodeID = item->data(0, DB_TREE_NODEID).toInt();

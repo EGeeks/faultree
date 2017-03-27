@@ -7,6 +7,7 @@ AddTreeNodeDialog::AddTreeNodeDialog(QWidget *parent) :
 {
     ui->setupUi(this);
     m_parentNodeID = 0;
+    m_nodeID = 0;
 
     class QValidator *validator=new QIntValidator(0,999999,this);
     ui->lineEdit_nodeID->setValidator(validator);
@@ -26,6 +27,11 @@ AddTreeNodeDialog::~AddTreeNodeDialog()
 void AddTreeNodeDialog::setParentNodeID(int id)
 {
     m_parentNodeID = id;
+}
+
+int AddTreeNodeDialog::getNodeID()
+{
+    return m_nodeID;
 }
 
 void AddTreeNodeDialog::on_CheckPushButton_clicked()
@@ -84,4 +90,6 @@ void AddTreeNodeDialog::on_addPushButton_clicked()
 
     query.exec(sql);
     this->close();
+
+    m_nodeID = nodeID;
 }

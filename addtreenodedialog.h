@@ -18,6 +18,7 @@ public:
     ~AddTreeNodeDialog();
 
     void setParentNodeID(int id);
+    int getNodeID();
 
 private slots:
     void on_CheckPushButton_clicked();
@@ -26,6 +27,7 @@ private slots:
 private:
     Ui::AddTreeNodeDialog *ui;
     int m_parentNodeID;
+    int m_nodeID;
 
 };
 

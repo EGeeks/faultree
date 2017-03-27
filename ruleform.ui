@@ -37,13 +37,6 @@
        </property>
       </widget>
      </item>
-     <item>
-      <widget class="QPushButton" name="pushButton_9">
-       <property name="text">
-        <string>数据库管理</string>
-       </property>
-      </widget>
-     </item>
     </layout>
    </item>
    <item>
