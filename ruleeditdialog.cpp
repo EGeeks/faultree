@@ -29,7 +29,7 @@ void RuleEditDialog::setMode(bool mode)
 }
 
 void RuleEditDialog::setRuleEditData(int ruleID, QString errDesc, QString detectTip,
-                                     QString paramID, int Judg, QString schemeID)
+                                     QString paramID, QString Judg, QString schemeID)
 {
     ui->lineEdit_ruleID_2->setText(QString::number(ruleID));
     ui->lineEdit_errDesc->setText(errDesc);

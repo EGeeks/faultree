@@ -64,7 +64,7 @@
        </property>
        <column>
         <property name="text">
-         <string notr="true">1</string>
+         <string notr="true">描述</string>
         </property>
        </column>
       </widget>

@@ -126,7 +126,7 @@ void MainWindow::createDB()
      */
     bsuccess = query.exec("create table IF NOT EXISTS rule " \
                           "(ruleID INTEGER unique, ErrDesc TEXT, detectTip TEXT, " \
-                          "paramID TEXT, Judg INTEGER, schemeID TEXT)");
+                          "paramID TEXT, Judg TEXT, schemeID TEXT)");
     if(bsuccess == false) {
         QMessageBox::warning(NULL, "错误", "数据库创建rule失败");
     }

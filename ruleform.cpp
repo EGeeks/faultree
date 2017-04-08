@@ -122,7 +122,7 @@ void RuleForm::updateRule(QTreeWidgetItem *item)
         QString errDesc = query.value("errDesc").toString();
         QString detectTip = query.value("detectTip").toString();
         QString paramID = query.value("paramID").toString();
-        int Judg = query.value("Judg").toInt();
+        QString Judg = query.value("Judg").toString();
         QString schemeID = query.value("schemeID").toString();
 
 

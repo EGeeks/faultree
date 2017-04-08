@@ -5,6 +5,8 @@
 #include <QSqlQuery>
 #include <QWidget>
 #include <QTreeWidgetItem>
+#include <QInputDialog>
+#include <QMessageBox>
 
 #include "common.h"
 
@@ -30,9 +32,11 @@ protected:
     void searchByAlarmID(QString alarmID);
 
 private slots:
+    void on_treeWidget_clicked(const QModelIndex &index);
     void on_radioButton_keyWord_toggled(bool checked);
     void on_radioButton_alarmID_toggled(bool checked);
     void on_lineEdit_search_textChanged(const QString &arg1);
+    void on_pushButton_clicked();
 
 private:
     Ui::ZhenDuanForm *ui;

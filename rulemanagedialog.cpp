@@ -26,7 +26,7 @@ void RuleManageDialog::listDB()
         QString errDesc = query.value("errDesc").toString();
         QString detectTip = query.value("detectTip").toString();
         QString paramID = query.value("paramID").toString();
-        int Judg = query.value("Judg").toInt();
+        QString Judg = query.value("Judg").toString();
         QString schemeID = query.value("schemeID").toString();
 
         QTableWidgetItem *firstItem = new QTableWidgetItem(QString::number(ruleID));
@@ -42,7 +42,7 @@ void RuleManageDialog::listDB()
         ui->tableWidget->setItem(row, 1, new QTableWidgetItem(errDesc));
         ui->tableWidget->setItem(row, 2, new QTableWidgetItem(detectTip));
         ui->tableWidget->setItem(row, 3, new QTableWidgetItem(paramID));
-        ui->tableWidget->setItem(row, 4, new QTableWidgetItem(QString::number(Judg)));
+        ui->tableWidget->setItem(row, 4, new QTableWidgetItem(Judg));
         ui->tableWidget->setItem(row, 5, new QTableWidgetItem(schemeID));
 
         row++;
@@ -108,7 +108,7 @@ void RuleManageDialog::on_editPushButton_clicked()
     QString errDesc = firstItem->data(DB_RULE_ERR_DESC).toString();
     QString detectTip = firstItem->data(DB_RULE_DETECT_TIP).toString();
     QString paramID = firstItem->data(DB_RULE_PARAMID).toString();
-    int Judg = firstItem->data(DB_RULE_JUDG).toInt();
+    QString Judg = firstItem->data(DB_RULE_JUDG).toString();
     QString schemeID = firstItem->data(DB_RULE_SCHEMEID).toString();
 
 

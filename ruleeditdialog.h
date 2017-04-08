@@ -18,8 +18,8 @@ public:
     ~RuleEditDialog();
 
     void setMode(bool mode);
-    void setRuleEditData(int ruleID, QString errDesc, QString detectTip, QString paramID, int Judg,
-                         QString schemeID);
+    void setRuleEditData(int ruleID, QString errDesc, QString detectTip, QString paramID,
+                         QString Judg, QString schemeID);
 
 private slots:
     void on_pushButton_clicked();

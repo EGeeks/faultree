@@ -154,6 +154,18 @@ void ZhenDuanForm::searchByAlarmID(QString alarmID)
     }
 }
 
+void ZhenDuanForm::on_treeWidget_clicked(const QModelIndex &index)
+{
+    Q_UNUSED(index);
+
+    QTreeWidgetItem *item = ui->treeWidget->currentItem();
+    if(item == NULL) {
+        return;
+    }
+    QString ErrDesc = item->data(0, DB_TREE_ERR_DESC).toString();
+    ui->lineEdit_ErrDesc->setText(ErrDesc);
+}
+
 void ZhenDuanForm::on_radioButton_keyWord_toggled(bool checked)
 {
     Q_UNUSED(checked);
@@ -185,3 +197,96 @@ void ZhenDuanForm::on_lineEdit_search_textChanged(const QString &arg1)
     }
 }
 
+
+void ZhenDuanForm::on_pushButton_clicked()
+{
+    qDebug() << "start check";
+    QSqlQuery query;
+    QString sql;
+
+    ui->textEdit->clear();
+
+    QTreeWidgetItem *item = ui->treeWidget->currentItem();
+    if(item == NULL) {
+        ui->textEdit->setText("未选择设备树");
+        return;
+    }
+    QString ErrDesc = item->data(0, DB_TREE_ERR_DESC).toString();
+    QString ruleIDs = item->data(0, DB_TREE_RULE_ID).toString();
+    ui->textEdit->append("故障: " + ErrDesc + "\n");
+
+    foreach (QString ruleID, ruleIDs.split("#")) {
+
+        // 1、满足“规则触发条件以A10001,”+“维修方案号0”条件默认已经触发（触发顺序见注）
+        sql = QString("SELECT * FROM rule WHERE ruleID == %1")
+                .arg(ruleID);
+        query.exec(sql);
+        if(query.next() == false) {
+            ui->textEdit->append("非法规则号 : " + ruleID + "\n");
+            return;
+        }
+
+        QString detectTip = query.value("detectTip").toString();
+        QString paramID = query.value("paramID").toString();
+        QString Judg = query.value("Judg").toString();
+        QString schemeID = query.value("schemeID").toString();
+        ui->textEdit->append("检测提示: " + detectTip + "\n");
+
+        // 3-1、如果维修方案号中出现如“W10002”时，
+        // 出现对话框（“检测提示”内容和确定结束按钮，该规则号不被要求回答“是”或“否”）；
+        if(schemeID != QString("0")) {
+            ui->textEdit->append("检测结束");
+            return;
+        }
+
+        // 弹“检测提示内容”对话框，要求回答“是”或“否”；
+        // 2、回答“是”或“否”后，将“故障描述”、“检测提示”、回答内容、分三行显示在诊断页面；
+        QString JudyNext;
+        int status = QMessageBox::information(this, "确认是或否",
+                                              detectTip, QMessageBox::Yes, QMessageBox::No);
+        if(status == QMessageBox::Yes) {
+            JudyNext = Judg.replace("A", "Y");
+            ui->textEdit->append("回答: Yes\n");
+        } else {
+            JudyNext = Judg.replace("A", "N");
+            ui->textEdit->append("回答: No\n");
+        }
+
+
+        //3、回答完后，就有了“是#规则ID”或者“否#规则ID”检测是否触发下一条提示框：
+        sql = QString("SELECT * FROM rule WHERE Judg == '%1';")
+                .arg(JudyNext);
+        query.exec(sql);
+        if(query.next() == false) {
+            ui->textEdit->append("数据库中未找到 规则: " + JudyNext);
+            return;
+        }
+
+        QString detectTip2 = query.value("detectTip").toString();
+        QString paramID2 = query.value("paramID").toString();
+        QString schemeID2 = query.value("schemeID").toString();
+        ui->textEdit->append("检测提示" + detectTip2 + "\n");
+        if(paramID2 == QString("0")) {
+            ui->textEdit->append("检测结束");
+            return;
+        }
+
+        // 检测参数
+        sql = QString("SELECT * FROM parameter WHERE paramID = '%1'").arg(paramID2);
+        query.exec(sql);
+        if(query.next() == false) {
+            ui->textEdit->append("数据库中未找到 参数: " + paramID2);
+            return;
+        }
+        QString paramDesc = query.value("paramDesc").toString();
+        int upperLimit = query.value("upperLimit").toInt();
+        int lowerLimit = query.value("lowerLimit").toInt();
+
+        int value= QInputDialog::getInt(NULL, paramDesc, "参数");
+        if(value > lowerLimit && value < upperLimit) {
+            ui->textEdit->append("检测结束");
+            return;
+        }
+
+    }
+}
