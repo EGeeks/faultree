@@ -40,6 +40,7 @@
     <property name="title">
      <string>功能</string>
     </property>
+    <addaction name="actionHome"/>
     <addaction name="zhenduanAction"/>
     <addaction name="treeMangeAction"/>
     <addaction name="ruleAction"/>
@@ -83,6 +84,7 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="actionHome"/>
    <addaction name="zhenduanAction"/>
    <addaction name="treeMangeAction"/>
    <addaction name="ruleAction"/>
@@ -152,6 +154,15 @@
    </property>
    <property name="text">
     <string>规则管理</string>
+   </property>
+  </action>
+  <action name="actionHome">
+   <property name="icon">
+    <iconset resource="image.qrc">
+     <normaloff>:/new/icon/icon/首页-首页.png</normaloff>:/new/icon/icon/首页-首页.png</iconset>
+   </property>
+   <property name="text">
+    <string>首页</string>
    </property>
   </action>
  </widget>

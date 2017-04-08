@@ -43,5 +43,6 @@
         <file>icon/zhuyetu.ico</file>
         <file>icon/交互诊断登录窗口.JPG</file>
         <file>icon/主界面背景图.jpg</file>
+        <file>icon/首页-首页.png</file>
     </qresource>
 </RCC>

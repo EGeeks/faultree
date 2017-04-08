@@ -57,6 +57,11 @@ void MainWindow::timerEvent(QTimerEvent *e)
     }
 }
 
+void MainWindow::on_actionHome_triggered()
+{
+    centerForm->setCurrentWidget(0);
+}
+
 void MainWindow::on_zhenduanAction_triggered()
 {
     centerForm->setCurrentWidget(1);

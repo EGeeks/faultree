@@ -32,6 +32,7 @@ protected:
     void createDB();
 
 private slots:
+    void on_actionHome_triggered();
     void on_zhenduanAction_triggered();
     void on_treeMangeAction_triggered();
     void on_ruleAction_triggered();

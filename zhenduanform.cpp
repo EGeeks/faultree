@@ -223,7 +223,7 @@ void ZhenDuanForm::on_pushButton_clicked()
         query.exec(sql);
         if(query.next() == false) {
             ui->textEdit->append("非法规则号 : " + ruleID + "\n");
-            return;
+            continue;
         }
 
         QString detectTip = query.value("detectTip").toString();
@@ -235,8 +235,9 @@ void ZhenDuanForm::on_pushButton_clicked()
         // 3-1、如果维修方案号中出现如“W10002”时，
         // 出现对话框（“检测提示”内容和确定结束按钮，该规则号不被要求回答“是”或“否”）；
         if(schemeID != QString("0")) {
-            ui->textEdit->append("检测结束");
-            return;
+            ui->textEdit->append("回答: Yes\n");
+            ui->textEdit->append("--------------");
+            continue;
         }
 
         // 弹“检测提示内容”对话框，要求回答“是”或“否”；
@@ -259,16 +260,16 @@ void ZhenDuanForm::on_pushButton_clicked()
         query.exec(sql);
         if(query.next() == false) {
             ui->textEdit->append("数据库中未找到 规则: " + JudyNext);
-            return;
+            continue;
         }
 
         QString detectTip2 = query.value("detectTip").toString();
         QString paramID2 = query.value("paramID").toString();
         QString schemeID2 = query.value("schemeID").toString();
-        ui->textEdit->append("检测提示" + detectTip2 + "\n");
+        ui->textEdit->append("检测提示: " + detectTip2 + "\n");
         if(paramID2 == QString("0")) {
-            ui->textEdit->append("检测结束");
-            return;
+            ui->textEdit->append("--------------");
+            continue;
         }
 
         // 检测参数
@@ -284,9 +285,10 @@ void ZhenDuanForm::on_pushButton_clicked()
 
         int value= QInputDialog::getInt(NULL, paramDesc, "参数");
         if(value > lowerLimit && value < upperLimit) {
-            ui->textEdit->append("检测结束");
-            return;
+            ui->textEdit->append("--------------");
+            continue;
         }
 
+        ui->textEdit->append("检测结束");
     }
 }
