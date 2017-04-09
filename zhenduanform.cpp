@@ -174,13 +174,7 @@ bool ZhenDuanForm::checkRule(QString id)
         QString Judg = query.value("Judg").toString();
         QString schemeID = query.value("schemeID").toString();
         ui->textEdit->append("检测提示: " + detectTip);
-        qDebug() << "===>> ruleID: " << ruleID << Judg;
-
-        if(paramID != "0") {
-            // 检查参数号
-            if(checkParam(schemeID) == false)
-                return false;
-        }
+        qDebug() << "===>> ruleID: " << ruleID << paramID << Judg;
 
         if(schemeID != "0") {
             qDebug() << "root find : " << schemeID;
@@ -190,14 +184,24 @@ bool ZhenDuanForm::checkRule(QString id)
         }
 
         QString JudyNext;
-        int status = QMessageBox::information(this, "确认是或否",
-                                              detectTip, QMessageBox::Yes, QMessageBox::No);
-        if(status == QMessageBox::Yes) {
-            JudyNext = "Y" + ruleID;
-            ui->textEdit->append("回答: Yes\n");
+        if(paramID == "0") {
+            int status = QMessageBox::information(this, "确认是或否",
+                                                  detectTip, QMessageBox::Yes, QMessageBox::No);
+            if(status == QMessageBox::Yes) {
+                JudyNext = "Y" + ruleID;
+                ui->textEdit->append("回答: Yes\n");
+            } else {
+                JudyNext = "N" + ruleID;
+                ui->textEdit->append("回答: No\n");
+            }
         } else {
-            JudyNext = "N" + ruleID;
-            ui->textEdit->append("回答: No\n");
+            if(checkParam(paramID) == true) {
+                JudyNext = "Y" + ruleID;
+                ui->textEdit->append("回答: Yes\n");
+            } else {
+                JudyNext = "N" + ruleID;
+                ui->textEdit->append("回答: No\n");
+            }
         }
 
         ruleID = findByJudy(JudyNext);
@@ -219,10 +223,12 @@ bool ZhenDuanForm::checkParam(QString id)
         return false;
     }
     QString paramDesc = query.value("paramDesc").toString();
-    int upperLimit = query.value("upperLimit").toInt();
-    int lowerLimit = query.value("lowerLimit").toInt();
+    float upperLimit = query.value("upperLimit").toFloat();
+    float lowerLimit = query.value("lowerLimit").toFloat();
 
-    int value= QInputDialog::getInt(NULL, paramDesc, "参数");
+    qDebug() << "upperLimit/lowerLimit" << upperLimit << lowerLimit;
+
+    float value= QInputDialog::getInt(NULL, paramDesc, "参数");
     if(value > lowerLimit && value < upperLimit) {
         return true;
     }
