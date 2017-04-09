@@ -31,6 +31,11 @@ protected:
     void searchByKeyword(QString keyword);
     void searchByAlarmID(QString alarmID);
 
+    bool checkRule(QString id);
+    bool checkParam(QString id);
+    QString findByJudy(QString Judy);
+    void printRepair(QString schemeID);
+
 private slots:
     void on_treeWidget_clicked(const QModelIndex &index);
     void on_radioButton_keyWord_toggled(bool checked);

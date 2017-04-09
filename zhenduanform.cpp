@@ -154,6 +154,116 @@ void ZhenDuanForm::searchByAlarmID(QString alarmID)
     }
 }
 
+bool ZhenDuanForm::checkRule(QString id)
+{
+    QSqlQuery query;
+    QString sql;
+
+    QString ruleID = id;
+
+    while (1) {
+        sql = QString("SELECT * FROM rule WHERE ruleID == %1")
+                .arg(ruleID);
+        query.exec(sql);
+        if(query.next() == false) {
+            ui->textEdit->append("非法规则号 : " + ruleID + "\n");
+            break;
+        }
+        QString detectTip = query.value("detectTip").toString();
+        QString paramID = query.value("paramID").toString();
+        QString Judg = query.value("Judg").toString();
+        QString schemeID = query.value("schemeID").toString();
+        ui->textEdit->append("检测提示: " + detectTip);
+        qDebug() << "===>> ruleID: " << ruleID << Judg;
+
+        if(paramID != "0") {
+            // 检查参数号
+            if(checkParam(schemeID) == false)
+                return false;
+        }
+
+        if(schemeID != "0") {
+            qDebug() << "root find : " << schemeID;
+            printRepair(schemeID);
+            // 打印维修信息
+            return true;
+        }
+
+        QString JudyNext;
+        int status = QMessageBox::information(this, "确认是或否",
+                                              detectTip, QMessageBox::Yes, QMessageBox::No);
+        if(status == QMessageBox::Yes) {
+            JudyNext = "Y" + ruleID;
+            ui->textEdit->append("回答: Yes\n");
+        } else {
+            JudyNext = "N" + ruleID;
+            ui->textEdit->append("回答: No\n");
+        }
+
+        ruleID = findByJudy(JudyNext);
+    }
+
+    return false;
+}
+
+// 检测参数
+bool ZhenDuanForm::checkParam(QString id)
+{
+    QSqlQuery query;
+    QString sql;
+
+    sql = QString("SELECT * FROM parameter WHERE paramID = '%1'").arg(id);
+    query.exec(sql);
+    if(query.next() == false) {
+        ui->textEdit->append("数据库中未找到 参数: " + id);
+        return false;
+    }
+    QString paramDesc = query.value("paramDesc").toString();
+    int upperLimit = query.value("upperLimit").toInt();
+    int lowerLimit = query.value("lowerLimit").toInt();
+
+    int value= QInputDialog::getInt(NULL, paramDesc, "参数");
+    if(value > lowerLimit && value < upperLimit) {
+        return true;
+    }
+
+    return false;
+}
+
+QString ZhenDuanForm::findByJudy(QString Judy)
+{
+    QSqlQuery query;
+    QString sql;
+
+    sql = QString("SELECT * FROM rule WHERE Judg == '%1';")
+            .arg(Judy);
+    query.exec(sql);
+    if(query.next() == false) {
+        ui->textEdit->append("数据库中未找到 规则: " + Judy);
+        return NULL;
+    }
+
+    return query.value("ruleID").toString();
+}
+
+void ZhenDuanForm::printRepair(QString schemeID)
+{
+    QSqlQuery query;
+    QString sql;
+
+    sql = QString("SELECT * FROM scheme WHERE schemeID == '%1';")
+            .arg(schemeID);
+    query.exec(sql);
+    if(query.next() == false)
+        return;
+
+    QString repair = query.value("repair").toString();
+    ui->textEdit->append("维修方案号: " + schemeID);
+    ui->textEdit->append("维修步骤: \n" + repair);
+    ui->textEdit->append("\n");
+}
+
+
 void ZhenDuanForm::on_treeWidget_clicked(const QModelIndex &index)
 {
     Q_UNUSED(index);
@@ -200,7 +310,6 @@ void ZhenDuanForm::on_lineEdit_search_textChanged(const QString &arg1)
 
 void ZhenDuanForm::on_pushButton_clicked()
 {
-    qDebug() << "start check";
     QSqlQuery query;
     QString sql;
 
@@ -217,78 +326,9 @@ void ZhenDuanForm::on_pushButton_clicked()
 
     foreach (QString ruleID, ruleIDs.split("#")) {
 
-        // 1、满足“规则触发条件以A10001,”+“维修方案号0”条件默认已经触发（触发顺序见注）
-        sql = QString("SELECT * FROM rule WHERE ruleID == %1")
-                .arg(ruleID);
-        query.exec(sql);
-        if(query.next() == false) {
-            ui->textEdit->append("非法规则号 : " + ruleID + "\n");
-            continue;
-        }
-
-        QString detectTip = query.value("detectTip").toString();
-        QString paramID = query.value("paramID").toString();
-        QString Judg = query.value("Judg").toString();
-        QString schemeID = query.value("schemeID").toString();
-        ui->textEdit->append("检测提示: " + detectTip + "\n");
-
-        // 3-1、如果维修方案号中出现如“W10002”时，
-        // 出现对话框（“检测提示”内容和确定结束按钮，该规则号不被要求回答“是”或“否”）；
-        if(schemeID != QString("0")) {
-            ui->textEdit->append("回答: Yes\n");
-            ui->textEdit->append("--------------");
-            continue;
-        }
-
-        // 弹“检测提示内容”对话框，要求回答“是”或“否”；
-        // 2、回答“是”或“否”后，将“故障描述”、“检测提示”、回答内容、分三行显示在诊断页面；
-        QString JudyNext;
-        int status = QMessageBox::information(this, "确认是或否",
-                                              detectTip, QMessageBox::Yes, QMessageBox::No);
-        if(status == QMessageBox::Yes) {
-            JudyNext = Judg.replace("A", "Y");
-            ui->textEdit->append("回答: Yes\n");
-        } else {
-            JudyNext = Judg.replace("A", "N");
-            ui->textEdit->append("回答: No\n");
-        }
-
-
-        //3、回答完后，就有了“是#规则ID”或者“否#规则ID”检测是否触发下一条提示框：
-        sql = QString("SELECT * FROM rule WHERE Judg == '%1';")
-                .arg(JudyNext);
-        query.exec(sql);
-        if(query.next() == false) {
-            ui->textEdit->append("数据库中未找到 规则: " + JudyNext);
-            continue;
-        }
-
-        QString detectTip2 = query.value("detectTip").toString();
-        QString paramID2 = query.value("paramID").toString();
-        QString schemeID2 = query.value("schemeID").toString();
-        ui->textEdit->append("检测提示: " + detectTip2 + "\n");
-        if(paramID2 == QString("0")) {
-            ui->textEdit->append("--------------");
-            continue;
-        }
-
-        // 检测参数
-        sql = QString("SELECT * FROM parameter WHERE paramID = '%1'").arg(paramID2);
-        query.exec(sql);
-        if(query.next() == false) {
-            ui->textEdit->append("数据库中未找到 参数: " + paramID2);
-            return;
-        }
-        QString paramDesc = query.value("paramDesc").toString();
-        int upperLimit = query.value("upperLimit").toInt();
-        int lowerLimit = query.value("lowerLimit").toInt();
-
-        int value= QInputDialog::getInt(NULL, paramDesc, "参数");
-        if(value > lowerLimit && value < upperLimit) {
-            ui->textEdit->append("--------------");
-            continue;
-        }
-
-        ui->textEdit->append("检测结束");
+        if(checkRule(ruleID) == true)
+            break;
     }
+
+    ui->textEdit->append("检测结束");
 }
