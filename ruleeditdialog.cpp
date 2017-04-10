@@ -52,7 +52,7 @@ void RuleEditDialog::on_pushButton_clicked()
                 .arg(ui->lineEdit_errDesc->text())
                 .arg(ui->lineEdit_detectTip->text())
                 .arg(ui->lineEdit_paramID->text())
-                .arg(0)
+                .arg(ui->lineEdit_Judy->text())
                 .arg(ui->lineEdit_schemeID->text());
 
 
@@ -62,12 +62,12 @@ void RuleEditDialog::on_pushButton_clicked()
         // 编辑
         QString sql = QString("UPDATE rule SET " \
                               "ErrDesc='%1', detectTip='%2', " \
-                              "paramID=%3, Judg=%4, " \
+                              "paramID=%3, Judg='%4'', " \
                               "schemeID='%5' WHERE ruleID=%6;")
                 .arg(ui->lineEdit_errDesc->text())
                 .arg(ui->lineEdit_detectTip->text())
                 .arg(ui->lineEdit_paramID->text())
-                .arg(0)
+                .arg(ui->lineEdit_Judy->text())
                 .arg(ui->lineEdit_schemeID->text())
                 .arg(ui->lineEdit_ruleID_2->text());
 

@@ -14,7 +14,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>添加规则</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -83,27 +83,14 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_15">
      <item>
-      <widget class="QCheckBox" name="checkBox">
-       <property name="layoutDirection">
-        <enum>Qt::RightToLeft</enum>
-       </property>
+      <widget class="QLabel" name="label">
        <property name="text">
-        <string>是否判断：</string>
+        <string>触发条件：</string>
        </property>
       </widget>
      </item>
      <item>
-      <spacer name="horizontalSpacer_2">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
+      <widget class="QLineEdit" name="lineEdit_Judy"/>
      </item>
     </layout>
    </item>

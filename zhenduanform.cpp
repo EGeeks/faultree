@@ -176,31 +176,42 @@ bool ZhenDuanForm::checkRule(QString id)
         ui->textEdit->append("检测提示: " + detectTip);
         qDebug() << "===>> ruleID: " << ruleID << paramID << Judg;
 
-        if(schemeID != "0") {
-            qDebug() << "root find : " << schemeID;
-            printRepair(schemeID);
-            // 打印维修信息
-            return true;
-        }
-
         QString JudyNext;
+        bool ack;
         if(paramID == "0") {
+            // 布尔型判断
             int status = QMessageBox::information(this, "确认是或否",
                                                   detectTip, QMessageBox::Yes, QMessageBox::No);
             if(status == QMessageBox::Yes) {
+                ack = true;
                 JudyNext = "Y" + ruleID;
                 ui->textEdit->append("回答: Yes\n");
             } else {
+                ack = false;
                 JudyNext = "N" + ruleID;
                 ui->textEdit->append("回答: No\n");
             }
         } else {
+            // 区间之内判断
             if(checkParam(paramID) == true) {
+                ack = true;
                 JudyNext = "Y" + ruleID;
-                ui->textEdit->append("回答: Yes\n");
             } else {
+                ack = false;
                 JudyNext = "N" + ruleID;
-                ui->textEdit->append("回答: No\n");
+            }
+        }
+
+        if(schemeID != "0") {
+            if(ack == true) {
+                qDebug() << "root find : " << schemeID;
+                printRepair(schemeID);
+                // 打印维修信息
+                return true;
+            } else {
+                qDebug() << "not found";
+                ui->textEdit->append("《未确定, 继续下个规则树》");
+                return false;
             }
         }
 
@@ -223,12 +234,17 @@ bool ZhenDuanForm::checkParam(QString id)
         return false;
     }
     QString paramDesc = query.value("paramDesc").toString();
+    QString paramType = query.value("paramType").toString();
     float upperLimit = query.value("upperLimit").toFloat();
     float lowerLimit = query.value("lowerLimit").toFloat();
 
     qDebug() << "upperLimit/lowerLimit" << upperLimit << lowerLimit;
 
     float value= QInputDialog::getInt(NULL, paramDesc, "参数");
+    QString str = QString("参数范围:[%1%2, %3%4]")
+            .arg(lowerLimit).arg(paramType).arg(upperLimit).arg(paramType);
+    ui->textEdit->append(str);
+    ui->textEdit->append("输入: " + QString::number(value) + paramType + "\n");
     if(value > lowerLimit && value < upperLimit) {
         return true;
     }

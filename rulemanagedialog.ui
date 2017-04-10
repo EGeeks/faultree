@@ -3,7 +3,7 @@
  <class>RuleManageDialog</class>
  <widget class="QDialog" name="RuleManageDialog">
   <property name="windowModality">
-   <enum>Qt::ApplicationModal</enum>
+   <enum>Qt::NonModal</enum>
   </property>
   <property name="geometry">
    <rect>
@@ -53,7 +53,7 @@
      </column>
      <column>
       <property name="text">
-       <string>是否判断</string>
+       <string>触发条件</string>
       </property>
      </column>
      <column>
