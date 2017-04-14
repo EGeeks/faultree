@@ -164,3 +164,13 @@ void MainWindow::createDB()
         QMessageBox::warning(NULL, "错误", "数据库创建parameter失败");
     }
 }
+
+// 退出按钮触发
+void MainWindow::on_exitAction_triggered()
+{
+    int status = QMessageBox::warning(this, "确认",
+                                      "确定退出？", QMessageBox::Yes, QMessageBox::No);
+
+    if(status == QMessageBox::Yes)
+        this->close();
+}

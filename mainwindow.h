@@ -6,6 +6,7 @@
 #include <QLabel>
 #include <QMainWindow>
 #include <QMessageBox>
+#include <QMessageBox>
 #include <QSqlQuery>
 
 #include "login.h"
@@ -39,6 +40,7 @@ private slots:
     void on_fileAction_triggered();
     void on_maintrainAction_triggered();
     void on_helpToolAction_triggered();
+    void on_exitAction_triggered();
 
 private:
     Ui::MainWindow *ui;

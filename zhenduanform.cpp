@@ -210,7 +210,7 @@ bool ZhenDuanForm::checkRule(QString id)
                 return true;
             } else {
                 qDebug() << "not found";
-                ui->textEdit->append("《未确定, 继续下个规则树》");
+                //ui->textEdit->append("《未确定, 继续下个规则树》");
                 return false;
             }
         }
