@@ -26,7 +26,8 @@ SOURCES += main.cpp\
     ruleeditdialog.cpp \
     parameditdialog.cpp \
     schememanagedialog.cpp \
-    schemeeditdialog.cpp
+    schemeeditdialog.cpp \
+    accountdialog.cpp
 
 HEADERS  += login.h \
     mainwindow.h \
@@ -42,7 +43,8 @@ HEADERS  += login.h \
     ruleeditdialog.h \
     parameditdialog.h \
     schememanagedialog.h \
-    schemeeditdialog.h
+    schemeeditdialog.h \
+    accountdialog.h
 
 FORMS    += login.ui \
     mainwindow.ui \
@@ -56,7 +58,8 @@ FORMS    += login.ui \
     ruleeditdialog.ui \
     parameditdialog.ui \
     schememanagedialog.ui \
-    schemeeditdialog.ui
+    schemeeditdialog.ui \
+    accountdialog.ui
 
 RESOURCES += \
     image.qrc
