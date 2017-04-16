@@ -28,6 +28,9 @@ protected:
     void listNode();
 
 
+private slots:
+    void on_pushButton_account_2_clicked();
+
 private:
     Ui::CenterForm *ui;
 

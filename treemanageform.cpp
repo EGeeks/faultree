@@ -199,12 +199,28 @@ void TreeManageForm::on_treeWidget_clicked(const QModelIndex &index)
     int nodeID = item->data(0, DB_TREE_NODEID).toInt();
     int ErrID = item->data(0, DB_TREE_ERR_ID).toInt();
     QString ErrDesc = item->data(0, DB_TREE_ERR_DESC).toString();
-    QString ruleID = item->data(0, DB_TREE_RULE_ID).toString();
+    int ruleID = item->data(0, DB_TREE_RULE_ID).toInt();
 
     ui->lineEdit_ErrDesc->setText(ErrDesc);
     ui->lineEdit_nodeID->setText(QString::number(nodeID));
     ui->lineEdit_errID->setText(QString::number(ErrID));
-    ui->lineEdit_ruleID->setText(ruleID);
+
+    int alias = 0;
+    QSqlQuery query;
+    QString sql = QString("SELECT * FROM rule WHERE ruleID == %1;").arg(ruleID);
+    query.exec(sql);
+    if(!query.next()) {
+        // ui->lineEdit_ruleID->setText("ruleID " + ruleID);
+        return;
+    }
+    alias = query.value("alias").toInt();
+
+    sql = QString("SELECT * FROM rule WHERE alias == %1;").arg(alias);
+    query.exec(sql);
+    while (query.next()) {
+       int rule_id = query.value("ruleID").toInt();
+       ui->lineEdit_ruleID->setText(ui->lineEdit_ruleID->text() + " " + QString::number(rule_id));
+    }
 }
 
 void TreeManageForm::on_treeWidget_customContextMenuRequested(const QPoint &pos)

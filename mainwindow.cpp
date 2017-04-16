@@ -128,10 +128,11 @@ void MainWindow::createDB()
      *  paramID     参数ID
      *  Judg        判断标准
      *  schemeID    维修方案号
+     *  alias       规则树别名
      */
     bsuccess = query.exec("create table IF NOT EXISTS rule " \
                           "(ruleID INTEGER unique, ErrDesc TEXT, detectTip TEXT, " \
-                          "paramID TEXT, Judg TEXT, schemeID TEXT)");
+                          "paramID TEXT, Judg TEXT, schemeID TEXT, alias INT)");
     if(bsuccess == false) {
         QMessageBox::warning(NULL, "错误", "数据库创建rule失败");
     }
@@ -163,6 +164,22 @@ void MainWindow::createDB()
     if(bsuccess == false) {
         QMessageBox::warning(NULL, "错误", "数据库创建parameter失败");
     }
+
+
+    /*
+     *  user 表
+     *  username    login username
+     *  password    login password
+     *  repair      维修步骤
+     */
+    bsuccess = query.exec("create table IF NOT EXISTS user" \
+                          "(username TEXT unique, password TEXT, " \
+                          "diagnosis int, treemanage int, rulemanage int, "
+                          "filemanage int, system int)");
+    if(bsuccess == false) {
+        QMessageBox::warning(NULL, "错误", "数据库创建parameter失败");
+    }
+
 }
 
 // 退出按钮触发

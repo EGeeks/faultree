@@ -1,6 +1,6 @@
 #include "centerform.h"
 #include "ui_centerform.h"
-
+#include "accountdialog.h"
 
 CenterForm::CenterForm(QWidget *parent) :
     QWidget(parent),
@@ -34,4 +34,11 @@ void CenterForm::resizeEvent(QResizeEvent *event)
     zhenDuanForm->setGeometry(0, 0, event->size().width(), event->size().height());
     treeManageForm->setGeometry(0, 0, event->size().width(), event->size().height());
     ruleForm->setGeometry(0, 0, event->size().width(), event->size().height());
+}
+
+
+void CenterForm::on_pushButton_account_2_clicked()
+{
+    AccountDialog *accountDialog = new AccountDialog();
+    accountDialog->show();
 }

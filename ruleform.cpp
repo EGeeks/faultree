@@ -112,10 +112,18 @@ void RuleForm::updateRule(QTreeWidgetItem *item)
     int row = 0;
     int ruleID = item->data(0, DB_TREE_RULE_ID).toInt();
 
+    int alias = 0;
     QSqlQuery query;
-    QString sql = QString("SELECT * FROM rule WHERE ruleID == %1")
-            .arg(ruleID);
+    QString sql = QString("SELECT * FROM rule WHERE ruleID == %1;").arg(ruleID);
+    query.exec(sql);
+    if(!query.next()) {
+        qDebug() << "not found ruleID " << ruleID;
+        return;
+    }
+    alias = query.value("alias").toInt();
 
+    sql = QString("SELECT * FROM rule WHERE alias == %1")
+            .arg(alias);
     query.exec(sql);
     while (query.next()) {
         int nodeID = query.value("ruleID").toInt();

@@ -6,14 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>826</width>
-    <height>431</height>
+    <width>623</width>
+    <height>355</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QHBoxLayout" name="horizontalLayout_2">
+  <layout class="QHBoxLayout" name="horizontalLayout_5">
    <item>
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
@@ -59,7 +59,7 @@
           <item>
            <widget class="QRadioButton" name="radioButton_keyWord">
             <property name="text">
-             <string>关键字搜索</string>
+             <string>关键字</string>
             </property>
             <property name="checked">
              <bool>true</bool>
@@ -69,7 +69,7 @@
           <item>
            <widget class="QRadioButton" name="radioButton_alarmID">
             <property name="text">
-             <string>报警号搜索</string>
+             <string>报警号(100~999)</string>
             </property>
            </widget>
           </item>
@@ -101,6 +101,30 @@
      </item>
      <item>
       <widget class="QTextEdit" name="textEdit"/>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton_2">
+         <property name="text">
+          <string>生产报告</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </item>
     </layout>
    </item>

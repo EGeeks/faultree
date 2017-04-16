@@ -38,4 +38,16 @@ enum DBSchemeKey {
     DB_SCHEME_REPAIR,
 };
 
+
+// 对应user 表中的属性
+enum DBUserKey {
+    DB_USER_USERNAME = Qt::UserRole + 100,
+    DB_USER_PASSWORD,
+    DB_USER_DIAGNOSIS,
+    DB_USER_TREE,
+    DB_USER_RULE,
+    DB_USER_FILE,
+    DB_USER_SYSTEM,
+};
+
 #endif // COMMON_H

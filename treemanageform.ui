@@ -89,7 +89,14 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_ruleID"/>
+           <widget class="QLineEdit" name="lineEdit_ruleID">
+            <property name="minimumSize">
+             <size>
+              <width>300</width>
+              <height>0</height>
+             </size>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>

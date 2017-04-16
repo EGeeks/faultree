@@ -176,6 +176,13 @@ bool ZhenDuanForm::checkRule(QString id)
         ui->textEdit->append("检测提示: " + detectTip);
         qDebug() << "===>> ruleID: " << ruleID << paramID << Judg;
 
+        if(schemeID != "0") {
+            qDebug() << "root find : " << schemeID;
+            printRepair(schemeID);
+            // 打印维修信息
+            return true;
+        }
+
         QString JudyNext;
         bool ack;
         if(paramID == "0") {
@@ -199,19 +206,6 @@ bool ZhenDuanForm::checkRule(QString id)
             } else {
                 ack = false;
                 JudyNext = "N" + ruleID;
-            }
-        }
-
-        if(schemeID != "0") {
-            if(ack == true) {
-                qDebug() << "root find : " << schemeID;
-                printRepair(schemeID);
-                // 打印维修信息
-                return true;
-            } else {
-                qDebug() << "not found";
-                ui->textEdit->append("《未确定, 继续下个规则树》");
-                return false;
             }
         }
 
@@ -332,9 +326,6 @@ void ZhenDuanForm::on_lineEdit_search_textChanged(const QString &arg1)
 
 void ZhenDuanForm::on_pushButton_clicked()
 {
-    QSqlQuery query;
-    QString sql;
-
     ui->textEdit->clear();
 
     QTreeWidgetItem *item = ui->treeWidget->currentItem();
