@@ -120,7 +120,7 @@
        <item>
         <widget class="QPushButton" name="pushButton_2">
          <property name="text">
-          <string>生产报告</string>
+          <string>生成报告</string>
          </property>
         </widget>
        </item>
