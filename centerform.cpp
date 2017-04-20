@@ -42,3 +42,37 @@ void CenterForm::on_pushButton_account_2_clicked()
     AccountDialog *accountDialog = new AccountDialog();
     accountDialog->show();
 }
+
+// 打开word
+void CenterForm::on_pushButton_word_clicked()
+{
+    QAxWidget word("Word.Application");
+    word.setProperty("Visible", true);
+    QAxObject * documents = word.querySubObject("Documents");
+    //documents->dynamicCall("Add (void)");
+    //QAxObject * document = word.querySubObject("ActiveDocument");
+}
+
+// 打开Excel文档
+void CenterForm::on_pushButton_Excel_clicked()
+{
+    //隐式的打开一个excel应用程序
+    QAxWidget excel("Excel.Application");
+    excel.setProperty("Visible", true);
+    //获取所有工作文档
+    //QAxObject * workbooks = excel.querySubObject("WorkBooks");
+    //创建一个excel文档
+    // workbooks->dynamicCall("Add (void)");
+    //获取当前激活的文档
+    //QAxObject *workbook = excel.querySubObject("ActiveWorkBook");//获取当前工作簿
+}
+
+
+// 打开计算器
+void CenterForm::on_pushButton_calc_clicked()
+{
+    QProcess* process = new QProcess();
+    QString CalcPath = "calc.exe";
+    process->start(CalcPath);
+}
+

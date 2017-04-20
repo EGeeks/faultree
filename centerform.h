@@ -4,6 +4,8 @@
 #include <QDebug>
 #include <QWidget>
 #include <QResizeEvent>
+#include <QAxWidget>
+#include <QProcess>
 
 #include "zhenduanform.h"
 #include "treemanageform.h"
@@ -30,6 +32,9 @@ protected:
 
 private slots:
     void on_pushButton_account_2_clicked();
+    void on_pushButton_word_clicked();
+    void on_pushButton_Excel_clicked();
+    void on_pushButton_calc_clicked();
 
 private:
     Ui::CenterForm *ui;

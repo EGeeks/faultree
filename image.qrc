@@ -47,8 +47,8 @@
         <file>icon/accoun.png</file>
         <file>icon/data_back.png</file>
         <file>icon/data_recovey.png</file>
-        <file>icon/pdf.png</file>
         <file>icon/word.png</file>
         <file>icon/计算器.png</file>
+        <file>icon/excel.png</file>
     </qresource>
 </RCC>

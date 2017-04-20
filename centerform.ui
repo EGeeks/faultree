@@ -432,7 +432,7 @@
          <item>
           <layout class="QVBoxLayout" name="verticalLayout_10">
            <item>
-            <widget class="QPushButton" name="pushButton_account_3">
+            <widget class="QPushButton" name="pushButton_word">
              <property name="text">
               <string/>
              </property>
@@ -469,7 +469,7 @@
              <item>
               <widget class="QLabel" name="label_11">
                <property name="text">
-                <string>打开word</string>
+                <string>启动word</string>
                </property>
               </widget>
              </item>
@@ -506,13 +506,13 @@
          <item>
           <layout class="QVBoxLayout" name="verticalLayout_11">
            <item>
-            <widget class="QPushButton" name="pushButton_9">
+            <widget class="QPushButton" name="pushButton_Excel">
              <property name="text">
               <string/>
              </property>
              <property name="icon">
               <iconset resource="image.qrc">
-               <normaloff>:/new/icon/icon/pdf.png</normaloff>:/new/icon/icon/pdf.png</iconset>
+               <normaloff>:/new/icon/icon/excel.png</normaloff>:/new/icon/icon/excel.png</iconset>
              </property>
              <property name="iconSize">
               <size>
@@ -543,7 +543,7 @@
              <item>
               <widget class="QLabel" name="label_12">
                <property name="text">
-                <string>打开PDF</string>
+                <string>启动Excel</string>
                </property>
               </widget>
              </item>
@@ -580,7 +580,7 @@
          <item>
           <layout class="QVBoxLayout" name="verticalLayout_12">
            <item>
-            <widget class="QPushButton" name="pushButton_12">
+            <widget class="QPushButton" name="pushButton_calc">
              <property name="text">
               <string/>
              </property>
