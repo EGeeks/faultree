@@ -204,6 +204,7 @@ void TreeManageForm::on_treeWidget_clicked(const QModelIndex &index)
     ui->lineEdit_ErrDesc->setText(ErrDesc);
     ui->lineEdit_nodeID->setText(QString::number(nodeID));
     ui->lineEdit_errID->setText(QString::number(ErrID));
+    ui->lineEdit_ruleID->setText("");
 
     int alias = 0;
     QSqlQuery query;
