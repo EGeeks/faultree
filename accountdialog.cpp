@@ -7,6 +7,11 @@ AccountDialog::AccountDialog(QWidget *parent) :
     ui(new Ui::AccountDialog)
 {
     ui->setupUi(this);
+
+    ListDB();
+
+    modify_flag = false;
+    ui->tableWidget->setEnabled(modify_flag);
 }
 
 AccountDialog::~AccountDialog()
@@ -31,13 +36,6 @@ void AccountDialog::ListDB()
         int system = query.value("system").toInt();
 
         QTableWidgetItem *firstItem = new QTableWidgetItem(QString::number(row));
-        //        firstItem->setData(DB_USER_USERNAME, username);
-        //        firstItem->setData(DB_USER_PASSWORD, password);
-        //        firstItem->setData(DB_USER_DIAGNOSIS, diagnosis);
-        //        firstItem->setData(DB_USER_TREE, treemanage);
-        //        firstItem->setData(DB_USER_RULE, rulemanage);
-        //        firstItem->setData(DB_USER_FILE, filemanage);
-        //        firstItem->setData(DB_USER_FILE, system);
 
         ui->tableWidget->setRowCount(ui->tableWidget->rowCount() + 1);
         ui->tableWidget->setItem(row, 0, firstItem);
@@ -68,33 +66,35 @@ void AccountDialog::ListDB()
     }
 }
 
-void AccountDialog::on_pushButton_login_clicked()
+void AccountDialog::on_pushButton_add_clicked()
 {
     QString username = ui->lineEdit_username->text();
     QString password = ui->lineEdit_password->text();
 
-
-    QSqlQuery query;
-    QString sql = QString("SELECT * FROM user WHERE username == '%1' AND password='%2';")
-            .arg(username)
-            .arg(password);
-
-    query.exec(sql);
-    if(query.next()) {
-        ListDB();
-    } else {
-        QMessageBox::warning(this, "登录", "用户名或密码不正确");
+    if(username.isEmpty() || password.isEmpty()) {
+        QMessageBox::warning(this, "错误", "账号或者密码不能为空！");
+        return;
     }
 
-}
+    QSqlQuery query;
+    QString sql = QString("SELECT COUNT(1) as count FROM user WHERE username='%1';").arg(username);
+    query.exec(sql);
+    if(query.next() == false) {
+        QMessageBox::warning(this, "错误", "数据库查询user 出错");
+        return;
+    }
 
-void AccountDialog::on_pushButton_add_clicked()
-{
+    int count = query.value("count").toInt();
+    if(count > 0) {
+        QMessageBox::warning(this, "错误", "用户名重复");
+        return;
+    }
+
     int row = ui->tableWidget->rowCount();
     ui->tableWidget->setRowCount(ui->tableWidget->rowCount() + 1);
     ui->tableWidget->setItem(row, 0, new QTableWidgetItem(QString::number(row)));
-    ui->tableWidget->setItem(row, 1, new QTableWidgetItem(""));
-    ui->tableWidget->setItem(row, 2, new QTableWidgetItem(""));
+    ui->tableWidget->setItem(row, 1, new QTableWidgetItem(username));
+    ui->tableWidget->setItem(row, 2, new QTableWidgetItem(password));
 
     QTableWidgetItem *diagnosis_check = new QTableWidgetItem();
     diagnosis_check->setCheckState(Qt::Unchecked);
@@ -115,16 +115,38 @@ void AccountDialog::on_pushButton_add_clicked()
     QTableWidgetItem *system_check = new QTableWidgetItem();
     system_check->setCheckState(Qt::Unchecked);
     ui->tableWidget->setItem(row, 7, system_check);
+
+    sql = QString("INSERT INTO user (username, password, diagnosis, treemanage, rulemanage, filemanage, system) " \
+                  "VALUES ('%1', '%2', 0, 0, 0, 0, 0);")
+            .arg(username)
+            .arg(password);
+    query.exec(sql);
 }
 
 void AccountDialog::on_pushButton_delete_clicked()
 {
+    int row = ui->tableWidget->currentRow();
     ui->tableWidget->removeRow(ui->tableWidget->currentRow());
 
-    ui->tableWidget->setEditTriggers (QAbstractItemView::NoEditTriggers);
+    //ui->tableWidget->item(row, 0)->
+
+    //    sql = QString("DELETE FROM user WHERE username='%1' ")
+    //            .arg(username);
+    //    query.exec(sql);
 }
 
 void AccountDialog::on_pushButton_modify_clicked()
 {
-    ui->tableWidget->setEditTriggers(QAbstractItemView::DoubleClicked);
+    modify_flag = !modify_flag;
+    ui->tableWidget->setEnabled(modify_flag);
+
+    if(modify_flag == false)
+        ui->pushButton_modify->setText("修改");
+    else
+        ui->pushButton_modify->setText("关闭修改");
+}
+
+void AccountDialog::on_tableWidget_clicked(const QModelIndex &index)
+{
+    qDebug() << index;
 }
