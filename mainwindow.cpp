@@ -42,6 +42,37 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_LoginPass(QString username)
 {
+    QSqlQuery query;
+    QString sql = QString("SELECT * FROM user WHERE username='%1';")
+            .arg(username);
+    query.exec(sql);
+    if(query.next() == false) {
+        QMessageBox::warning(this, "错误", "MainWindow数据库查询user 出错");
+        return;
+    }
+
+    int diagnosis = query.value("diagnosis").toInt();
+    int treemanage = query.value("treemanage").toInt();
+    int rulemanage = query.value("rulemanage").toInt();
+    int filemanage = query.value("filemanage").toInt();
+    int system = query.value("system").toInt();
+
+    if(diagnosis == 0)
+        ui->zhenduanAction->setEnabled(false);
+
+    if(treemanage == 0)
+        ui->treeMangeAction->setEnabled(false);
+
+    if(rulemanage == 0)
+        ui->ruleAction->setEnabled(false);
+
+    if(filemanage == 0)
+        ui->fileAction->setEnabled(false);
+
+    if(system == 0)
+        ui->maintrainAction->setEnabled(false);
+
+
     m_currUsername = username;
     login->close();
     this->show();

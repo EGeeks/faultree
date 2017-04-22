@@ -126,13 +126,16 @@ void AccountDialog::on_pushButton_add_clicked()
 void AccountDialog::on_pushButton_delete_clicked()
 {
     int row = ui->tableWidget->currentRow();
-    ui->tableWidget->removeRow(ui->tableWidget->currentRow());
+    QString username = ui->tableWidget->item(row, 1)->text();
+    ui->tableWidget->removeRow(row);
 
-    //ui->tableWidget->item(row, 0)->
 
-    //    sql = QString("DELETE FROM user WHERE username='%1' ")
-    //            .arg(username);
-    //    query.exec(sql);
+    qDebug() << "Delete" << username;
+
+    QSqlQuery query;
+    QString sql = QString("DELETE FROM user WHERE username='%1' ")
+            .arg(username);
+    query.exec(sql);
 }
 
 void AccountDialog::on_pushButton_modify_clicked()
@@ -148,5 +151,27 @@ void AccountDialog::on_pushButton_modify_clicked()
 
 void AccountDialog::on_tableWidget_clicked(const QModelIndex &index)
 {
-    qDebug() << index;
+    int row = ui->tableWidget->currentRow();
+
+    QString username = ui->tableWidget->item(row, 1)->text();
+    QString password = ui->tableWidget->item(row, 2)->text();
+
+    int diagnosis = ui->tableWidget->item(row, 3)->checkState() == Qt::Checked ? 1 : 0;
+    int treemanage = ui->tableWidget->item(row, 4)->checkState() == Qt::Checked ? 1 : 0;
+    int rulemanage = ui->tableWidget->item(row, 5)->checkState() == Qt::Checked ? 1 : 0;
+    int filemanage = ui->tableWidget->item(row, 6)->checkState() == Qt::Checked ? 1 : 0;
+    int system = ui->tableWidget->item(row, 7)->checkState() == Qt::Checked ? 1 : 0;
+
+    QString sql = QString("UPDATE user SET password='%1', diagnosis=%2, treemanage=%3, " \
+                          "rulemanage=%4, filemanage=%5, system=%6 WHERE username='%7'; ")
+            .arg(password)
+            .arg(diagnosis)
+            .arg(treemanage)
+            .arg(rulemanage)
+            .arg(filemanage)
+            .arg(system)
+            .arg(username);
+
+    QSqlQuery query;
+    query.exec(sql);
 }

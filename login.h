@@ -1,7 +1,9 @@
 #ifndef LOGIN_H
 #define LOGIN_H
 
+#include <QDebug>
 #include <QDialog>
+#include <QSqlQuery>
 
 namespace Ui {
 class Login;
