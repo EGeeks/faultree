@@ -50,5 +50,8 @@
         <file>icon/word.png</file>
         <file>icon/计算器.png</file>
         <file>icon/excel.png</file>
+        <file>icon/删除.png</file>
+        <file>icon/添加.png</file>
+        <file>icon/修改.png</file>
     </qresource>
 </RCC>

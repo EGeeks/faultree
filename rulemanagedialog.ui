@@ -70,6 +70,10 @@
        <property name="text">
         <string>添加</string>
        </property>
+       <property name="icon">
+        <iconset resource="image.qrc">
+         <normaloff>:/new/icon/icon/添加.png</normaloff>:/new/icon/icon/添加.png</iconset>
+       </property>
       </widget>
      </item>
      <item>
@@ -77,12 +81,20 @@
        <property name="text">
         <string>删除</string>
        </property>
+       <property name="icon">
+        <iconset resource="image.qrc">
+         <normaloff>:/new/icon/icon/删除.png</normaloff>:/new/icon/icon/删除.png</iconset>
+       </property>
       </widget>
      </item>
      <item>
       <widget class="QPushButton" name="editPushButton">
        <property name="text">
         <string>编辑</string>
+       </property>
+       <property name="icon">
+        <iconset resource="image.qrc">
+         <normaloff>:/new/icon/icon/修改.png</normaloff>:/new/icon/icon/修改.png</iconset>
        </property>
       </widget>
      </item>
@@ -110,6 +122,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="image.qrc"/>
+ </resources>
  <connections/>
 </ui>
