@@ -366,8 +366,8 @@ void ZhenDuanForm::on_pushButton_clicked()
 // PDF
 void ZhenDuanForm::on_pushButton_baogao_clicked()
 {
-    QString pdfName = QDir::currentPath() + "\\database" + "\\"
-            + QDateTime::currentDateTime().toString("report_yyyy-MM-dd hh:mm:ss") + ".pdf";
+    QString pdfName = QDir::currentPath() + "/database" + "/" + ui->lineEdit_ErrDesc->text() + "-"
+             + QDateTime::currentDateTime().toString("yyyy-MM-dd hh-mm-ss") + ".pdf";
 
     QPrinter printer_text;
     printer_text.setPageSize(QPrinter::A4);  //设置纸张大小为A4
