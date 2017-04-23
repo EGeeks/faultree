@@ -1,6 +1,7 @@
 #include "centerform.h"
 #include "ui_centerform.h"
 #include "accountdialog.h"
+#include "mydb.h"
 
 CenterForm::CenterForm(QWidget *parent) :
     QWidget(parent),
@@ -77,3 +78,28 @@ void CenterForm::on_pushButton_calc_clicked()
     process->start(CalcPath);
 }
 
+
+void CenterForm::on_pushButton_databank_clicked()
+{
+    bool ok;
+    QString houzhou = QInputDialog::getText(this, tr("备份数据"),
+                                         tr("文件后缀"), QLineEdit::Normal,
+                                         QDir::home().dirName(), &ok);
+    if (ok && !houzhou.isEmpty()) {
+        QFileInfo fileinfo(DB_NAME);
+        QFile::copy(DB_NAME, "database/" + fileinfo.baseName() + "-" + houzhou + "." +fileinfo.suffix());
+    }
+}
+
+void CenterForm::on_pushButton_datarecovry_clicked()
+{
+    QString path = QDir::currentPath() + "/database";
+    QString fileName = QFileDialog::getOpenFileName(this, "备份恢复", path, "*.sqlite");
+    if(fileName != NULL) {
+        //QFileInfo fileinfo(fileName);
+        QFile::remove("tree.sqlite");
+        QFile::copy(fileName, "tree.sqlite");
+        qDebug() << "recorvy:" << fileName;
+        QMessageBox::information(this, "备份恢复", "数据已恢复， 请重启软件");
+    }
+}

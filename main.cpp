@@ -8,7 +8,7 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
     QDir dir;
-    dir.mkdir(QDir::currentPath() + "\\database");
+    dir.mkdir(QDir::currentPath() + "/database");
 
     MainWindow w;
     w.hide();

@@ -18,7 +18,7 @@ FileForm::~FileForm()
 
 void FileForm::listFile()
 {
-    QString path = QDir::currentPath() + "\\database";
+    QString path = QDir::currentPath() + "/database";
 
     model = new QFileSystemModel();
     model->setRootPath(path);
@@ -29,13 +29,13 @@ void FileForm::listFile()
 
 void FileForm::on_pushButton_add_clicked()
 {
-    QString path = QDir::currentPath() + "\\database";
+    QString path = QDir::currentPath() + "/database";
     QString fileName = QFileDialog::getOpenFileName(this, "添加文件", path);
     if(fileName != NULL) {
         qDebug() << "选择:" << fileName;
 
         QFileInfo fileinfo(fileName);
-        QFile::copy(fileName, path + "\\" + fileinfo.fileName());
+        QFile::copy(fileName, path + "/" + fileinfo.fileName());
     }
 }
 
