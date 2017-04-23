@@ -204,7 +204,7 @@ void TreeManageForm::on_treeWidget_clicked(const QModelIndex &index)
     ui->lineEdit_ErrDesc->setText(ErrDesc);
     ui->lineEdit_nodeID->setText(QString::number(nodeID));
     ui->lineEdit_errID->setText(QString::number(ErrID));
-    ui->lineEdit_ruleID->setText("");
+    ui->textEdit_ruleID->clear();
 
     int alias = 0;
     QSqlQuery query;
@@ -219,8 +219,8 @@ void TreeManageForm::on_treeWidget_clicked(const QModelIndex &index)
     sql = QString("SELECT * FROM rule WHERE alias == %1;").arg(alias);
     query.exec(sql);
     while (query.next()) {
-       int rule_id = query.value("ruleID").toInt();
-       ui->lineEdit_ruleID->setText(ui->lineEdit_ruleID->text() + " " + QString::number(rule_id));
+        int rule_id = query.value("ruleID").toInt();
+        ui->textEdit_ruleID->append(QString::number(rule_id));
     }
 }
 
