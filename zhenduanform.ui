@@ -118,7 +118,7 @@
         </spacer>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_2">
+        <widget class="QPushButton" name="pushButton_baogao">
          <property name="text">
           <string>生成报告</string>
          </property>

@@ -76,6 +76,8 @@ void MainWindow::on_LoginPass(QString username)
     m_currUsername = username;
     login->close();
     this->show();
+
+    centerForm->setLoginUsername(m_currUsername);
 }
 
 

@@ -4,7 +4,7 @@
 #include <QDebug>
 #include <QWidget>
 #include <QResizeEvent>
-#include <QAxWidget>
+//#include <QAxWidget>
 #include <QProcess>
 
 #include "zhenduanform.h"
@@ -24,6 +24,8 @@ public:
     explicit CenterForm(QWidget *parent = 0);
     ~CenterForm();
 
+    void setLoginUsername(QString username);
+
     void setCurrentWidget(int index);
 
 protected:
@@ -39,6 +41,7 @@ private slots:
 
 private:
     Ui::CenterForm *ui;
+    QString login_username;
 
     ZhenDuanForm *zhenDuanForm;
     TreeManageForm *treeManageForm;

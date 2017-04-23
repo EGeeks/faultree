@@ -16,6 +16,11 @@ ZhenDuanForm::~ZhenDuanForm()
     delete ui;
 }
 
+void ZhenDuanForm::setLoginUsername(QString username)
+{
+    logine_username = username;
+}
+
 // 创建root 节点
 void ZhenDuanForm::listAllNode()
 {
@@ -173,11 +178,12 @@ bool ZhenDuanForm::checkRule(QString id)
         QString paramID = query.value("paramID").toString();
         QString Judg = query.value("Judg").toString();
         QString schemeID = query.value("schemeID").toString();
-        ui->textEdit->append("检测提示: " + detectTip);
+        ui->textEdit->append("<b>检测提示:</b> " + detectTip);
         qDebug() << "===>> ruleID: " << ruleID << paramID << Judg;
 
         if(schemeID != "0") {
             qDebug() << "root find : " << schemeID;
+            zhenduan_result = detectTip;
             printRepair(schemeID);
             // 打印维修信息
             return true;
@@ -192,11 +198,11 @@ bool ZhenDuanForm::checkRule(QString id)
             if(status == QMessageBox::Yes) {
                 ack = true;
                 JudyNext = "Y" + ruleID;
-                ui->textEdit->append("回答: Yes\n");
+                ui->textEdit->append("<b>回答:</b> Yes");
             } else {
                 ack = false;
                 JudyNext = "N" + ruleID;
-                ui->textEdit->append("回答: No\n");
+                ui->textEdit->append("<b>回答:<b> No");
             }
         } else {
             // 区间之内判断
@@ -209,6 +215,7 @@ bool ZhenDuanForm::checkRule(QString id)
             }
         }
 
+        ui->textEdit->append("\n");
         ruleID = findByJudy(JudyNext);
     }
 
@@ -235,10 +242,10 @@ bool ZhenDuanForm::checkParam(QString id)
     qDebug() << "upperLimit/lowerLimit" << upperLimit << lowerLimit;
 
     float value= QInputDialog::getInt(NULL, paramDesc, "参数");
-    QString str = QString("参数范围:[%1%2, %3%4]")
+    QString str = QString("<b>参数范围:</b>[%1%2, %3%4]")
             .arg(lowerLimit).arg(paramType).arg(upperLimit).arg(paramType);
     ui->textEdit->append(str);
-    ui->textEdit->append("输入: " + QString::number(value) + paramType + "\n");
+    ui->textEdit->append("<b>输入:</b> " + QString::number(value) + paramType + "\n");
     if(value > lowerLimit && value < upperLimit) {
         return true;
     }
@@ -274,8 +281,9 @@ void ZhenDuanForm::printRepair(QString schemeID)
         return;
 
     QString repair = query.value("repair").toString();
-    ui->textEdit->append("维修方案号: " + schemeID);
-    ui->textEdit->append("维修步骤: \n" + repair);
+    ui->textEdit->append("<b>维修方案号:</b> " + schemeID);
+    ui->textEdit->append("<b>维修步骤:</b> \n");
+    ui->textEdit->append(repair);
     ui->textEdit->append("\n");
 }
 
@@ -326,6 +334,7 @@ void ZhenDuanForm::on_lineEdit_search_textChanged(const QString &arg1)
 
 void ZhenDuanForm::on_pushButton_clicked()
 {
+    zhenduan_result.clear();
     ui->textEdit->clear();
 
     QTreeWidgetItem *item = ui->treeWidget->currentItem();
@@ -335,7 +344,13 @@ void ZhenDuanForm::on_pushButton_clicked()
     }
     QString ErrDesc = item->data(0, DB_TREE_ERR_DESC).toString();
     QString ruleIDs = item->data(0, DB_TREE_RULE_ID).toString();
-    ui->textEdit->append("故障: " + ErrDesc + "\n");
+    ui->textEdit->append("<b>诊断时间 : " + QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss") + "</b>");
+    ui->textEdit->append("<b>诊断人员 : </b>" + logine_username);
+    ui->textEdit->append("<b>诊断故障名称: " + ErrDesc + "</b>");
+    ui->textEdit->append("\n");
+
+    ui->textEdit->append("<h4>诊断过程</h4>\n");
+    ui->textEdit->append("\n");
 
     foreach (QString ruleID, ruleIDs.split("#")) {
 
@@ -343,5 +358,28 @@ void ZhenDuanForm::on_pushButton_clicked()
             break;
     }
 
-    ui->textEdit->append("检测结束");
+    ui->textEdit->append("<b>检测结束</b>");
+    ui->textEdit->append("\n");
+    ui->textEdit->append("<b>诊断结果:</b>  " + zhenduan_result);
+}
+
+// PDF
+void ZhenDuanForm::on_pushButton_baogao_clicked()
+{
+    QString pdfName = QDir::currentPath() + "\\database" + "\\"
+            + QDateTime::currentDateTime().toString("report_yyyy-MM-dd hh:mm:ss") + ".pdf";
+
+    QPrinter printer_text;
+    printer_text.setPageSize(QPrinter::A4);  //设置纸张大小为A4
+    printer_text.setOutputFormat(QPrinter::PdfFormat);
+    printer_text.setOutputFileName(pdfName);//pdfname为要保存的pdf文件名
+
+    QTextDocument text_document;
+    QString html = ui->textEdit->toHtml();
+
+    qDebug() << "PDF" << html;
+
+    text_document.setHtml(html);
+    text_document.print(&printer_text);
+    text_document.end();
 }
