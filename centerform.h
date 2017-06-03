@@ -4,7 +4,7 @@
 #include <QDebug>
 #include <QWidget>
 #include <QResizeEvent>
-//#include <QAxWidget>
+#include <QAxWidget>
 #include <QProcess>
 
 #include "zhenduanform.h"

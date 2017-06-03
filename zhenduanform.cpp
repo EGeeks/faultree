@@ -193,8 +193,14 @@ bool ZhenDuanForm::checkRule(QString id)
         bool ack;
         if(paramID == "0") {
             // 布尔型判断
-            int status = QMessageBox::information(this, "确认是或否",
-                                                  detectTip, QMessageBox::Yes, QMessageBox::No);
+            QMessageBox msgBox;
+            msgBox.setWindowFlags(Qt::CustomizeWindowHint);
+            msgBox.setText("确认是或否");
+            msgBox.setInformativeText(detectTip);
+            msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+            msgBox.setDefaultButton(QMessageBox::Yes);
+
+            int status = msgBox.exec();
             if(status == QMessageBox::Yes) {
                 ack = true;
                 JudyNext = "Y" + ruleID;
@@ -367,7 +373,7 @@ void ZhenDuanForm::on_pushButton_clicked()
 void ZhenDuanForm::on_pushButton_baogao_clicked()
 {
     QString pdfName = QDir::currentPath() + "/database" + "/" + ui->lineEdit_ErrDesc->text() + "-"
-             + QDateTime::currentDateTime().toString("yyyy-MM-dd hh-mm-ss") + ".pdf";
+            + QDateTime::currentDateTime().toString("yyyy-MM-dd hh-mm-ss") + ".pdf";
 
     QPrinter printer_text;
     printer_text.setPageSize(QPrinter::A4);  //设置纸张大小为A4

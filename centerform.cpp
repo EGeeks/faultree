@@ -57,16 +57,16 @@ void CenterForm::on_pushButton_account_2_clicked()
 // 打开word
 void CenterForm::on_pushButton_word_clicked()
 {
-    // QAxWidget word("Word.Application");
-    // word.setProperty("Visible", true);
+    QAxWidget word("Word.Application");
+    word.setProperty("Visible", true);
 }
 
 // 打开Excel文档
 void CenterForm::on_pushButton_Excel_clicked()
 {
     //隐式的打开一个excel应用程序
-    // QAxWidget excel("Excel.Application");
-    // excel.setProperty("Visible", true);
+    QAxWidget excel("Excel.Application");
+    excel.setProperty("Visible", true);
 }
 
 
@@ -83,8 +83,8 @@ void CenterForm::on_pushButton_databank_clicked()
 {
     bool ok;
     QString houzhou = QInputDialog::getText(this, tr("备份数据"),
-                                         tr("文件后缀"), QLineEdit::Normal,
-                                         QDir::home().dirName(), &ok);
+                                            tr("文件后缀"), QLineEdit::Normal,
+                                            QDir::home().dirName(), &ok);
     if (ok && !houzhou.isEmpty()) {
         QFileInfo fileinfo(DB_NAME);
         QFile::copy(DB_NAME, "database/" + fileinfo.baseName() + "-" + houzhou + "." +fileinfo.suffix());

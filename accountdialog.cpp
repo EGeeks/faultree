@@ -151,7 +151,11 @@ void AccountDialog::on_pushButton_modify_clicked()
 
 void AccountDialog::on_tableWidget_clicked(const QModelIndex &index)
 {
-    int row = ui->tableWidget->currentRow();
+    qDebug() << "===============  on_tableWidget_clicked  ===============" << index.row();
+
+    int row = index.row();
+
+    qDebug() << "row : " << row;
 
     QString username = ui->tableWidget->item(row, 1)->text();
     QString password = ui->tableWidget->item(row, 2)->text();
